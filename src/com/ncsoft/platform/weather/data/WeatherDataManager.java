@@ -50,8 +50,18 @@ public class WeatherDataManager {
 		int gridy = (int)(location.getLatitude()  * 22.23306308 - 708.4424054);
 		
 		String DailyUrlFormat = "http://www.kma.go.kr/wid/queryDFS.jsp?gridx=%1$d&gridy=%2$d";
+		// 동네예보가 http://www.kma.go.kr/wid/queryDFSRSS.jsp?zone=4282025000 로 바뀜
+		// http://www.kma.go.kr/wid/queryDFS.jsp?gridx=87&gridy=142
+		// http://www.kma.go.kr/wid/queryDFSRSS.jsp?zone=4282033000
+		// 읍명동 단위 3일간 예보
+		
 		String weeklyUrlFormat = "http://www.kma.go.kr/weather/forecast/mid-term-xml.jsp?stnId=%1$d";
+		// 중기예보는 http://www.kma.go.kr/weather/forecast/mid-term-rss3.jsp?stnId=108 로 바뀜
+		// 전국 및 광역도 단위. 2주간 예보
+			
 		String curWeatherURL = "http://www.kma.go.kr/XML/weather/sfc_web_map.xml";
+		// 아이콘 설명은 http://www.kma.go.kr/weather/icon_info.jsp
+		// 참고 블로그 http://fronteer.kr/bbs/view/47 - Grid X, Y와 위경도 변환 javascript 코드		
 		
 		synchronized (this) {
 			mFutureWeatherData = new FutureWeatherData();
