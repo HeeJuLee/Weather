@@ -19,11 +19,12 @@ public class WeatherFragment extends Fragment {
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
 
-		View view = inflater.inflate(R.layout.weather_fragment, container, false);
+		View view = inflater.inflate(R.layout.activity_weather, container, false);
 		
 		TextView testView = (TextView) view.findViewById(R.id.test_view);
 		testView.setText(new String("test ¿‘¥œ¥Ÿ").toString());
 		
+
 		return view;
 		//return super.onCreateView(inflater, container, savedInstanceState);
 	}
