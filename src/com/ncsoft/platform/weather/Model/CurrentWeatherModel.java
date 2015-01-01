@@ -8,10 +8,7 @@ import android.util.Log;
 /* 
  * 현재날씨(분별)
  */
-@SuppressWarnings("unused")
 public class CurrentWeatherModel {
-	
-	private static final String TAG = "CurrentWeatherModel";
 
 	private Result result;		
 	private Common common;		
@@ -101,7 +98,7 @@ public class CurrentWeatherModel {
 		private Temperature temperature;
 		private String humidity;
 		private Pressure pressure;
-		private int lightning;
+		private String lightning;
 		private String timeObservation;
 		
 		public Station getStation() {
@@ -128,7 +125,7 @@ public class CurrentWeatherModel {
 		public Pressure getPressure() {
 			return pressure;
 		}
-		public int getLightning() {
+		public String getLightning() {
 			return lightning;
 		}		
 		public String getTimeObservation() {
@@ -138,36 +135,36 @@ public class CurrentWeatherModel {
 	// 관측소정보
 	public class Station {
 		private String name;
-		private int id;
+		private String id;
 		private String type;
-		private double latitude;
-		private double longitude;
+		private String latitude;
+		private String longitude;
 		
 		public String getName() {
 			return name;
 		}
-		public int getId() {
+		public String getId() {
 			return id;
 		}
 		public String getType() {
 			return type;
 		}
-		public double getLatitude() {
+		public String getLatitude() {
 			return latitude;
 		}
-		public double getLongitude() {
+		public String getLongitude() {
 			return longitude;
 		}
 	}
 	// 바람정보
 	public class Wind	{
-		private double wdir;
-		private double wspd;
+		private String wdir;
+		private String wspd;
 		
-		public double getWdir() {
+		public String getWdir() {
 			return wdir;
 		}
-		public double getWspd() {
+		public String getWspd() {
 			return wspd;
 		}
 	}
@@ -179,12 +176,12 @@ public class CurrentWeatherModel {
 		public static final int PRECIPITATION_SNOW = 3;
 		
 		private int type;
-		private double sinceOnTime;
+		private String sinceOnTime;
 		
 		public int getType() {
 			return type;
 		}
-		public double getSinceOnTime() {
+		public String getSinceOnTime() {
 			return sinceOnTime;
 		}
 		
@@ -253,69 +250,69 @@ public class CurrentWeatherModel {
 	}
 	// 강우정보
 	public class Rain {
-		private double sinceOntime;
-		private double sinceMidnight;
-		private double last10min;
-		private double last15min;
-		private double last30min;
-		private double last1hour;
-		private double last6hour;
-		private double last12hour;
-		private double last24hour;
+		private String sinceOntime;
+		private String sinceMidnight;
+		private String last10min;
+		private String last15min;
+		private String last30min;
+		private String last1hour;
+		private String last6hour;
+		private String last12hour;
+		private String last24hour;
 		
-		public double getSinceOntime() {
+		public String getSinceOntime() {
 			return sinceOntime;
 		}
-		public double getSinceMidnight() {
+		public String getSinceMidnight() {
 			return sinceMidnight;
 		}
-		public double getLast10min() {
+		public String getLast10min() {
 			return last10min;
 		}
-		public double getLast15min() {
+		public String getLast15min() {
 			return last15min;
 		}
-		public double getLast30min() {
+		public String getLast30min() {
 			return last30min;
 		}
-		public double getLast1hour() {
+		public String getLast1hour() {
 			return last1hour;
 		}
-		public double getLast6hour() {
+		public String getLast6hour() {
 			return last6hour;
 		}
-		public double getLast12hour() {
+		public String getLast12hour() {
 			return last12hour;
 		}
-		public double getLast24hour() {
+		public String getLast24hour() {
 			return last24hour;
 		}
 	}
 	// 기온정보
 	public class Temperature {
-		private double tc;
-		private double tmax;
-		private double tmin;
+		private String tc;
+		private String tmax;
+		private String tmin;
 		
-		public double getTc() {
+		public String getTc() {
 			return tc;
 		}
-		public double getTmax() {
+		public String getTmax() {
 			return tmax;
 		}
-		public double getTmin() {
+		public String getTmin() {
 			return tmin;
 		}
 	}
 	// 기압정보
 	public class Pressure {
-		private double surface;
-		private double seaLevel;
+		private String surface;
+		private String seaLevel;
 		
-		public double getSurface() {
+		public String getSurface() {
 			return surface;
 		}
-		public double getSeaLevel() {
+		public String getSeaLevel() {
 			return seaLevel;
 		}
 	}
