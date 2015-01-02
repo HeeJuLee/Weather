@@ -1,0 +1,68 @@
+{
+   "results" : [
+      {
+         "address_components" : [
+            {
+               "long_name" : "진북동",
+               "short_name" : "진북동",
+               "types" : [ "sublocality_level_2", "sublocality", "political" ]
+            },
+            {
+               "long_name" : "덕진구",
+               "short_name" : "덕진구",
+               "types" : [ "sublocality_level_1", "sublocality", "political" ]
+            },
+            {
+               "long_name" : "전주시",
+               "short_name" : "전주시",
+               "types" : [ "locality", "political" ]
+            },
+            {
+               "long_name" : "전라북도",
+               "short_name" : "전라북도",
+               "types" : [ "administrative_area_level_1", "political" ]
+            },
+            {
+               "long_name" : "대한민국",
+               "short_name" : "KR",
+               "types" : [ "country", "political" ]
+            },
+            {
+               "long_name" : "561-160",
+               "short_name" : "561-160",
+               "types" : [ "postal_code" ]
+            }
+         ],
+         "formatted_address" : "대한민국 전라북도 전주시 덕진구 진북동",
+         "geometry" : {
+            "bounds" : {
+               "northeast" : {
+                  "lat" : 35.8345314,
+                  "lng" : 127.1471249
+               },
+               "southwest" : {
+                  "lat" : 35.8168387,
+                  "lng" : 127.1254565
+               }
+            },
+            "location" : {
+               "lat" : 35.8278873,
+               "lng" : 127.1314186
+            },
+            "location_type" : "APPROXIMATE",
+            "viewport" : {
+               "northeast" : {
+                  "lat" : 35.8345314,
+                  "lng" : 127.1471249
+               },
+               "southwest" : {
+                  "lat" : 35.8168387,
+                  "lng" : 127.1254565
+               }
+            }
+         },
+         "types" : [ "sublocality_level_2", "sublocality", "political" ]
+      }
+   ],
+   "status" : "OK"
+}

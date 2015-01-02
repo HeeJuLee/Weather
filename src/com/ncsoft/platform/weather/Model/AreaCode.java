@@ -1,4 +1,4 @@
-package com.ncsoft.platform.weather.Model;
+package com.ncsoft.platform.weather.model;
 
 public class AreaCode {
 	
