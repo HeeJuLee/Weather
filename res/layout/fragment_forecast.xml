@@ -4,10 +4,12 @@
     android:layout_height="match_parent"
     android:orientation="vertical" >
     
-    <TextView android:id="@+id/list_weather_item_textview"
+	<TextView android:id="@+id/fragment_forecast_textview"
 	    android:layout_width="match_parent"
 	    android:layout_height="wrap_content"
 	    android:paddingLeft="4dp"
 	    android:paddingRight="4dp" />
-
+	
 </LinearLayout>
+
+

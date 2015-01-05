@@ -79,13 +79,15 @@ public final class R {
         public static final int weather42=0x7f020036;
     }
     public static final class id {
-        public static final int action_settings=0x7f080002;
+        public static final int action_settings=0x7f080003;
         public static final int container=0x7f080000;
-        public static final int weather_list_item_textview=0x7f080001;
+        public static final int fragment_forecast_textview=0x7f080001;
+        public static final int list_weather_item_textview=0x7f080002;
     }
     public static final class layout {
         public static final int activity_container=0x7f030000;
-        public static final int list_weather_item=0x7f030001;
+        public static final int fragment_forecast=0x7f030001;
+        public static final int list_weather_item=0x7f030002;
     }
     public static final class menu {
         public static final int weather=0x7f070000;

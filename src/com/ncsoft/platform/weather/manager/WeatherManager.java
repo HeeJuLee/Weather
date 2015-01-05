@@ -38,19 +38,34 @@ public class WeatherManager {
     }
 	
 	public ArrayList<CurrentWeatherModel> getCurrentWeatherList() {
+		if(mCurrentWeatherList == null)
+			loadCurrentWeatherList();
+		
+		return mCurrentWeatherList;
+	}
+	
+	public ArrayList<CurrentWeatherModel> getCurrentWeatherList(boolean reload) {
+		if(mCurrentWeatherList == null || reload == true)
+			loadCurrentWeatherList();
+		
+		return mCurrentWeatherList;
+	}
+	
+	private void loadCurrentWeatherList() {
 		mCurrentWeatherList = new ArrayList<CurrentWeatherModel>();
 		
-		GeocodeManager gm = new GeocodeManager();
-		gm.getLocationInfo("용인시 마북동");
+		String[] address = {"용인시 마북동", "분당구 삼평동", "전주시 진북동", "강남구 신사동" };
 		
-		for(int i = 0; i < 2; i++) {
+		GeocodeManager gm = new GeocodeManager();
+		
+		for(int i = 0; i < address.length; i++) {
+			gm.getLocationInfo(address[i]);
+			
 			CurrentWeatherModel current = getCurrentWeather(gm.getLatitude(), gm.getLongitude());
 			mCurrentWeatherList.add(current);
 			
 			Log.d(TAG, current.toString());
 		}
-		
-		return mCurrentWeatherList;
 	}
 	
 	private CurrentWeatherModel getCurrentWeather(double latitude, double longitude) {

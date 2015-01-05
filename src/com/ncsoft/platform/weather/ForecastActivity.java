@@ -5,9 +5,8 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 
+public class ForecastActivity extends FragmentActivity {
 
-public class WeatherActivity extends FragmentActivity {
-	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -17,7 +16,7 @@ public class WeatherActivity extends FragmentActivity {
         Fragment fragment = manager.findFragmentById(R.id.container);
 
         if (fragment == null) {
-            fragment = new WeatherListFragment();
+            fragment = new ForecastFragment();
             manager.beginTransaction()
                 .add(R.id.container, fragment)
                 .commit();
