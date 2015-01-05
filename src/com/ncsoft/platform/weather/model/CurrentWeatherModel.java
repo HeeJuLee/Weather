@@ -33,6 +33,7 @@ public class CurrentWeatherModel {
 		while(iterator.hasNext()) {
 			Minutely minutely = iterator.next();
 			
+			sb.append("\nCurrentWeather");
 			sb.append("\n관측소명: " + minutely.getStation().getName());			
 			sb.append("\n관측소 지점번호(stnid): " + minutely.getStation().getId());
 			sb.append("\n관측소 위도: " + minutely.getStation().getLatitude());
@@ -317,3 +318,6 @@ public class CurrentWeatherModel {
 		}
 	}
 }
+
+		
+		

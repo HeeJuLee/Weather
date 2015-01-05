@@ -3,11 +3,10 @@ package com.ncsoft.platform.weather.model;
 import java.util.Iterator;
 import java.util.List;
 
-
 /* 
  * 중기예보 (12시간 간격, 3일~10일예보)
  */
-public class ForecastWeekModel {
+public class Forecast6DayModel {
 	
 	private Result result;		
 	private Common common;
@@ -32,6 +31,7 @@ public class ForecastWeekModel {
 		while(iterator.hasNext()) {
 			Forecast6days forecast6day = iterator.next();
 			
+			sb.append("\nForecast6Days");
 			sb.append("\n광역시도: " + forecast6day.getGrid().getCity());			
 			sb.append("\n시군구: " + forecast6day.getGrid().getCounty());
 			sb.append("\n읍면동: " + forecast6day.getGrid().getVillage());

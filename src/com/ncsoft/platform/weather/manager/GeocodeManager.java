@@ -60,7 +60,7 @@ public class GeocodeManager {
 		}
 	}		
 	
-	public void searchLocationGoogle(String address) {
+	private void searchLocationGoogle(String address) {
 		
 		try {
 			HttpClient Client = new DefaultHttpClient();
@@ -81,7 +81,7 @@ public class GeocodeManager {
 		}
 	}
 	
-	public void searchLocation(Context context, String searchStr) {
+	private void searchLocation(Context context, String searchStr) {
 		Geocoder gc = new Geocoder(context, Locale.getDefault());
 		
 		List<Address> list = null;
@@ -101,7 +101,7 @@ public class GeocodeManager {
 		}
 	}
 	
-	public void searchLocation(Context context, double latitude, double longitude) {
+	private void searchLocation(Context context, double latitude, double longitude) {
 		Geocoder gc = new Geocoder(context, Locale.getDefault());
 		
 		List<Address> list = null;

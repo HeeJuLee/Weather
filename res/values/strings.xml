@@ -3,6 +3,11 @@
     <string name="app_name">Weather</string>
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
+    
+    <string name="weather_list">날씨 리스트</string>
+    
+<!--
+    <string name="action_settings">Settings</string>
 
     <string name="not_support_gps_network">GPS를 꺼놓으셨군요.. 서울을 기본 날씨값으로 표시합니다.</string>    
     <string name="empty_view_text">데이터 수신 중..</string>
@@ -20,5 +25,6 @@
     <string name="geocoder_error">위치정보를 가져올 수 없습니다. GEOCODER 오류. 네트워크가 안되거나 일시적으로 안되거나 구글사이트가 안되거나 당신 폰이 이상하거나..</string>
     <string name="gps_processing">GPS로 현재위치 검색 중</string>
     <string name="default_city">기본값:서울</string>
+    -->
     
 </resources>

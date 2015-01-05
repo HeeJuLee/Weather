@@ -1,11 +1,6 @@
 package com.ncsoft.platform.weather.manager;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.OutputStream;
-import java.io.OutputStreamWriter;
-import java.io.Writer;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -14,7 +9,8 @@ import android.util.Log;
 
 import com.google.gson.Gson;
 import com.ncsoft.platform.weather.model.CurrentWeatherModel;
-import com.ncsoft.platform.weather.model.ForecastWeekModel;
+import com.ncsoft.platform.weather.model.Forecast6DayModel;
+import com.ncsoft.platform.weather.util.FileUtils;
 import com.skp.openplatform.android.sdk.api.APIRequest;
 import com.skp.openplatform.android.sdk.common.PlanetXSDKConstants.CONTENT_TYPE;
 import com.skp.openplatform.android.sdk.common.RequestBundle;
@@ -24,10 +20,8 @@ public class WeatherManager {
 	private static final String TAG = "WeatherDataManager";
 	private static WeatherManager mWeatherManager;
 	
-	private CurrentWeatherModel mCurrentWeather;
-	private ForecastWeekModel mForecastWeek;
-	
 	private Context mContext;
+	private ArrayList<CurrentWeatherModel> mCurrentWeatherList;
 
 	private WeatherManager(Context context) {
 		mContext = context;
@@ -42,35 +36,24 @@ public class WeatherManager {
 		
         return mWeatherManager;
     }
-
-	public void getWeatherData(String address) {
+	
+	public ArrayList<CurrentWeatherModel> getCurrentWeatherList() {
+		mCurrentWeatherList = new ArrayList<CurrentWeatherModel>();
 		
 		GeocodeManager gm = new GeocodeManager();
-		gm.getLocationInfo(address);
+		gm.getLocationInfo("용인시 마북동");
 		
-		getWeatherData(gm.getLatitude(), gm.getLongitude());
+		for(int i = 0; i < 2; i++) {
+			CurrentWeatherModel current = getCurrentWeather(gm.getLatitude(), gm.getLongitude());
+			mCurrentWeatherList.add(current);
+			
+			Log.d(TAG, current.toString());
+		}
+		
+		return mCurrentWeatherList;
 	}
 	
-	public void getWeatherData(double latitude, double longitude) {
-		
-		getCurrentWeather(latitude, longitude);
-		getForecastWeek(latitude, longitude);
-		
-        Log.d(TAG, "\n\n=== WeatherPlanet - getCurrentWeather");
-        Log.d(TAG, mCurrentWeather.toString());
-        Log.d(TAG, "\n\n=== WeatherPlanet - getForecastWeek");
-        Log.d(TAG, mForecastWeek.toString());
-
-		/*
-		mCurrentWeather = getCurrentWeatherFromJson();
-		Log.d(TAG, mCurrentWeather.toString());
-		
-		mForecastWeek = getForecastWeekFromJson();
-		Log.d(TAG, mForecastWeek.toString());
-		*/
-	}
-	
-	private void getCurrentWeather(double latitude, double longitude) {
+	private CurrentWeatherModel getCurrentWeather(double latitude, double longitude) {
 		try {
 			String URL = "http://apis.skplanetx.com/weather/current/minutely";
 							 
@@ -90,14 +73,16 @@ public class WeatherManager {
 		    if(result.getStatusCode().equalsIgnoreCase("200")) {
 		    	Gson gson = new Gson(); 
 				
-		    	mCurrentWeather = gson.fromJson(result.toString(), CurrentWeatherModel.class);
+		    	return gson.fromJson(result.toString(), CurrentWeatherModel.class);
 		    }
 		} catch(Exception e) {
 			e.printStackTrace();
 		}
+		
+		return null;
 	}
 	
-	private void getForecastWeek(double latitude, double longitude) {
+	private Forecast6DayModel getForecast6Days(double latitude, double longitude) {
 		try {
 			String URL = "http://apis.skplanetx.com/weather/forecast/6days";
 							 
@@ -117,58 +102,33 @@ public class WeatherManager {
 		    if(result.getStatusCode().equalsIgnoreCase("200")) {
 		    	Gson gson = new Gson(); 
 				
-		    	mForecastWeek = gson.fromJson(result.toString(), ForecastWeekModel.class);
+		    	return gson.fromJson(result.toString(), Forecast6DayModel.class);
 		    }
 		} catch(Exception e) {
 			e.printStackTrace();
 		}
+		
+		return null;
 	}
 	
+
 	private CurrentWeatherModel getCurrentWeatherFromJson() {
 		Gson gson = new Gson(); 
 		
-		String result = getFileFromAssets("current_weather_response.json");
+		String result = FileUtils.getFileFromAssets(mContext, "current_weather_response.json");
 		
 		return gson.fromJson(result, CurrentWeatherModel.class);
 	}
 	
 	
-	private ForecastWeekModel getForecastWeekFromJson() {
+	private Forecast6DayModel getForecastWeekFromJson() {
 		Gson gson = new Gson(); 
 		
-		String result = getFileFromAssets("forecast_week_response.json");
+		String result = FileUtils.getFileFromAssets(mContext, "forecast_week_response.json");
 		
-		return gson.fromJson(result, ForecastWeekModel.class);
+		return gson.fromJson(result, Forecast6DayModel.class);
 	}
 
 	
-	public String getFileFromAssets(String fileName) {
-		StringBuilder s = new StringBuilder("");
-        try {
-            InputStreamReader in = new InputStreamReader(mContext.getResources().getAssets().open(fileName));
-            BufferedReader br = new BufferedReader(in);
-            String line;
-            while ((line = br.readLine()) != null) {
-                s.append(line);
-            }
-            return s.toString();
-        } catch (IOException e) {
-            e.printStackTrace();
-            return null;
-        }
-    } 
-
 	
-	public void writeToFile(String content, String filename) throws IOException {
-		Writer writer = null;
-		try {
-			OutputStream out = mContext.openFileOutput(filename, Context.MODE_PRIVATE);
-			writer = new OutputStreamWriter(out);
-			writer.write(content);
-		} finally {
-			if(writer != null)
-				writer.close();
-		}
-		
-	}
 }
