@@ -111,6 +111,8 @@ public class WeatherManager {
 		    if(result.getStatusCode().equalsIgnoreCase("200")) {
 		    	Gson gson = new Gson(); 
 				
+				Log.d(TAG, result.toString());
+
 		    	return gson.fromJson(result.toString(), typeOfT);
 		    }
 		} catch(PlanetXSDKException e) {

@@ -41,7 +41,7 @@ public class CurrentWeatherModel {
 			sb.append("\n풍향: " + minutely.getWind().getWdir());
 			sb.append("\n풍속: " + minutely.getWind().getWspd());
 			// 강우량 or 적설량
-			sb.append("\n" + minutely.getPrecipitation().getKorType() + ": " + minutely.getPrecipitation().getSinceOnTime());
+			sb.append("\n" + minutely.getPrecipitation().getKorType() + ": " + minutely.getPrecipitation().getSinceOntime());
 			sb.append("\n하늘상태: " + minutely.getSky().getName());
 			sb.append("\n하늘상태코드: " + minutely.getSky().getCode());
 			sb.append("\n현재기온: " + minutely.getTemperature().getTc());
@@ -200,13 +200,13 @@ public class CurrentWeatherModel {
 		public static final int PRECIPITATION_SNOW = 3;
 		
 		private int type;
-		private String sinceOnTime;
+		private String sinceOntime;
 		
 		public int getType() {
 			return type;
 		}
-		public String getSinceOnTime() {
-			return sinceOnTime;
+		public String getSinceOntime() {
+			return sinceOntime;
 		}
 		
 		public String getKorType() {

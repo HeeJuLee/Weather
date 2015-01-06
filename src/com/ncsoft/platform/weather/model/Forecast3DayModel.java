@@ -1,14 +1,12 @@
 package com.ncsoft.platform.weather.model;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
-
-import com.ncsoft.platform.weather.model.Forecast6DayModel.Common;
-import com.ncsoft.platform.weather.model.Forecast6DayModel.Forecast6days;
-import com.ncsoft.platform.weather.model.Forecast6DayModel.Grid;
-import com.ncsoft.platform.weather.model.Forecast6DayModel.Result;
-import com.ncsoft.platform.weather.model.Forecast6DayModel.Weather;
-
+	
 /* 
  * 단기예보 (3시간 간격, 4시간~3일예보)
  */
@@ -48,6 +46,18 @@ public class Forecast3DayModel {
 			sb.append("\n 내일 최고: " + forecast3day.getFcstdaily().getTemperature().getTmax2day());
 			sb.append("\n 모레 최저: " + forecast3day.getFcstdaily().getTemperature().getTmin3day());
 			sb.append("\n 모레 최고: " + forecast3day.getFcstdaily().getTemperature().getTmax3day());
+			
+			SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+			Date convertedDate = new Date();
+			try {
+				convertedDate = formatter.parse(forecast3day.getTimeRelease());
+			} catch (ParseException e) {
+				e.printStackTrace();
+			}
+			Calendar calendar = Calendar.getInstance();
+			calendar.setTime(convertedDate);
+					
+			sb.append("\n관측시간: " + forecast3day.getTimeRelease());
 		}
 		
 		return sb.toString();
@@ -91,13 +101,21 @@ public class Forecast3DayModel {
 	// 단기예보
 	public class Forecast3days {
 		private Grid grid;
+		private Fcst3hour fcst3hour;
 		private Fcstdaily fcstdaily;
+		private String timeRelease;
 		
 		public Grid getGrid() {
 			return grid;
 		}
+		public Fcst3hour getFcst3hour() {
+			return fcst3hour;
+		}
 		public Fcstdaily getFcstdaily() {
 			return fcstdaily;
+		}
+		public String getTimeRelease() {
+			return timeRelease;
 		}
 	}
 	// 격자정보
@@ -124,6 +142,18 @@ public class Forecast3DayModel {
 			return longitude;
 		}
 	}
+	// 3시간 예보
+	public class Fcst3hour {
+		private Sky sky;
+		private Temperature temperature;
+		
+		public class Sky {
+			
+		}
+		public class Temperature {
+			
+		}
+	}
 	// 24 시간 예보
 	public class Fcstdaily {
 		private Temperature temperature;
@@ -131,25 +161,25 @@ public class Forecast3DayModel {
 		public Temperature getTemperature() {
 			return temperature;
 		}
-	}
-	// 기온정보
-	public class Temperature {
-		private String tmin2day;
-		private String tmax2day;
-		private String tmin3day;
-		private String tmax3day;
-		
-		public String getTmin2day() {
-			return tmin2day;
-		}
-		public String getTmax2day() {
-			return tmax2day;
-		}
-		public String getTmin3day() {
-			return tmin3day;
-		}
-		public String getTmax3day() {
-			return tmax3day;
+		// 기온정보
+		public class Temperature {
+			private String tmin2day;
+			private String tmax2day;
+			private String tmin3day;
+			private String tmax3day;
+			
+			public String getTmin2day() {
+				return tmin2day;
+			}
+			public String getTmax2day() {
+				return tmax2day;
+			}
+			public String getTmin3day() {
+				return tmin3day;
+			}
+			public String getTmax3day() {
+				return tmax3day;
+			}
 		}
 	}
 }
