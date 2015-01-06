@@ -4,12 +4,34 @@
     android:layout_height="match_parent"
     android:orientation="vertical" >
     
-	<TextView android:id="@+id/fragment_forecast_textview"
-	    android:layout_width="match_parent"
-	    android:layout_height="wrap_content"
-	    android:paddingLeft="4dp"
-	    android:paddingRight="4dp" />
-	
+    <ScrollView
+        android:layout_width="match_parent"
+    	android:layout_height="match_parent">
+    
+        <LinearLayout
+    		android:layout_width="match_parent"
+    		android:layout_height="wrap_content"
+    		android:orientation="vertical" >
+	    
+		    <TextView android:id="@+id/fragment_forecast_textview_currentweather"
+			    android:layout_width="match_parent"
+			    android:layout_height="wrap_content"
+			    android:paddingLeft="4dp"
+			    android:paddingRight="4dp" />
+		    
+			<TextView android:id="@+id/fragment_forecast_textview_forecast3day"
+			    android:layout_width="match_parent"
+			    android:layout_height="wrap_content"
+			    android:paddingLeft="4dp"
+			    android:paddingRight="4dp" />
+			
+			<TextView android:id="@+id/fragment_forecast_textview_forecast6day"
+			    android:layout_width="match_parent"
+			    android:layout_height="wrap_content"
+			    android:paddingLeft="4dp"
+			    android:paddingRight="4dp" />
+		</LinearLayout>
+	</ScrollView>	
 </LinearLayout>
 
 

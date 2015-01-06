@@ -53,6 +53,29 @@ public class CurrentWeatherModel {
 		return sb.toString();
 	}
 	
+	public double getLatitude() {
+		List<Minutely> minutelys = weather.getMinutely();
+		
+		Iterator<Minutely> iterator = minutelys.iterator();
+		while(iterator.hasNext()) {
+			Minutely minutely = iterator.next();
+			
+			return Double.parseDouble(minutely.getStation().getLatitude());
+		}
+		return 0;
+	}
+	public double getLongitude() {
+		List<Minutely> minutelys = weather.getMinutely();
+		
+		Iterator<Minutely> iterator = minutelys.iterator();
+		while(iterator.hasNext()) {
+			Minutely minutely = iterator.next();
+			
+			return Double.parseDouble(minutely.getStation().getLongitude());
+		}
+		return 0;
+	}
+		
 	// 요청결과
 	public class Result {
 		private String message;

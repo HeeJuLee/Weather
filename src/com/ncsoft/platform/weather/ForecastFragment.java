@@ -2,26 +2,37 @@ package com.ncsoft.platform.weather;
 
 import java.util.ArrayList;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.ncsoft.platform.weather.manager.WeatherManager;
 import com.ncsoft.platform.weather.model.CurrentWeatherModel;
+import com.ncsoft.platform.weather.model.Forecast3DayModel;
+import com.ncsoft.platform.weather.model.Forecast3DayModel.Forecast3days;
+import com.ncsoft.platform.weather.model.Forecast6DayModel;
 
 public class ForecastFragment extends Fragment {
 	public static final String EXTRA_POSITION = "com.ncsoft.platform.weather.extra_position"; 
 	
-	int mCurrentPos = 0;
+	private int mPos = 0;
+	private Forecast3DayModel mForecast3Day;
+	private Forecast6DayModel mForecast6Day;
 	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		
-		mCurrentPos = getActivity().getIntent().getIntExtra(EXTRA_POSITION, 0);
+		mPos = getActivity().getIntent().getIntExtra(EXTRA_POSITION, 0);
+				
+		getForecastData();
 	}
 	
 	@Override
@@ -30,15 +41,60 @@ public class ForecastFragment extends Fragment {
 
 		View v = inflater.inflate(R.layout.fragment_forecast, container, false);
 		
-		TextView textView = (TextView) v.findViewById(R.id.fragment_forecast_textview);
+		TextView currentweather = (TextView) v.findViewById(R.id.fragment_forecast_textview_currentweather);
 		
 		WeatherManager weatherManager = WeatherManager.getInstance(getActivity());
 		ArrayList<CurrentWeatherModel> weatherList = weatherManager.getCurrentWeatherList();
-		CurrentWeatherModel current = weatherList.get(mCurrentPos);
-				
-		textView.setText(current.toString());
+		CurrentWeatherModel current = weatherList.get(mPos);
+
+		currentweather.setText(current.toString());
 		
 		return v;
 		//return super.onCreateView(inflater, container, savedInstanceState);
+	}
+	
+	private Handler mHandler = new Handler() {
+		@Override
+		public void handleMessage(Message msg) {
+			
+			if(msg.what == 1) {
+				if(mForecast3Day != null && mForecast6Day != null) {
+					TextView forecast3day = (TextView) getView().findViewById(R.id.fragment_forecast_textview_forecast3day);
+					TextView forecast6day = (TextView) getView().findViewById(R.id.fragment_forecast_textview_forecast6day);
+					forecast3day.setText(mForecast3Day.toString());
+					forecast6day.setText(mForecast6Day.toString());
+				}
+				else
+					Toast.makeText(getActivity(), R.string.forecast_is_null, Toast.LENGTH_SHORT).show();
+			}
+			else
+				Toast.makeText(getActivity(), R.string.forecast_load_exception, Toast.LENGTH_SHORT).show();
+		    
+			//super.handleMessage(msg);
+		}
+	};
+	
+	private void getForecastData() {
+		Thread thread = new Thread() {
+			@Override
+			public void run() {
+				try {
+					WeatherManager weatherManager = WeatherManager.getInstance(getActivity());
+					ArrayList<CurrentWeatherModel> currentWeatherList = weatherManager.getCurrentWeatherList();
+					CurrentWeatherModel currentWeather = currentWeatherList.get(mPos);
+					double latitude = currentWeather.getLatitude();
+					double longitude = currentWeather.getLongitude();
+							
+					mForecast3Day = weatherManager.getForecast3DayWeather(latitude, longitude);
+					mForecast6Day = weatherManager.getForecast6DayWeather(latitude, longitude);
+					
+					mHandler.sendEmptyMessage(1);
+				} catch(Exception e) {
+				    e.printStackTrace();
+				    mHandler.sendEmptyMessage(0);
+				}
+			}
+		};
+		thread.start();
 	}
 }

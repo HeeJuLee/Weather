@@ -17,11 +17,12 @@ import android.location.Geocoder;
 import android.util.Log;
 
 public class GeocodeManager {
-
 	private static final String TAG = "GeocodeManager";
-	
+	private static final String GOOGLE_GEOCODE_API = "http://maps.google.com/maps/api/geocode/json?sensor=true&language=ko&address=";
+
 	private double mLatitude;
 	private double mLongitude;
+	private String mFormattedAddress;
 	
 	public double getLatitude() {
 		return mLatitude;
@@ -30,13 +31,16 @@ public class GeocodeManager {
 	public double getLongitude() {
 		return mLongitude;
 	}
+	
+	public String getFormattedAddress() {
+		return mFormattedAddress;
+	}
 
 	public void getLocationInfo(String address) {
 
 		// 구글 지오코딩 API - 주소로 위경도를 읽어와서 JSON 파싱
 		StringBuilder sb = new StringBuilder();
-		sb.append("http://maps.google.com/maps/api/geocode/json?sensor=true&language=ko&address=")
-			.append(address.replace(" ", "%20"));
+		sb.append(GOOGLE_GEOCODE_API).append(address.replace(" ", "%20"));
 
 		try {
 			HttpClient client = new DefaultHttpClient();
@@ -52,35 +56,15 @@ public class GeocodeManager {
 					.getJSONObject("geometry").getJSONObject("location").getDouble("lat");
 			mLongitude = ((JSONArray)jsonObject.get("results")).getJSONObject(0)
 					.getJSONObject("geometry").getJSONObject("location").getDouble("lng");			
+			mFormattedAddress = ((JSONArray)jsonObject.get("results")).getJSONObject(0).getString("formatted_address").replace("대한민국 ", "");	
 			
-            Log.d(TAG, "address: " + address + ", latitde: " + mLatitude + ", longtitude: " + mLongitude);
+            Log.d(TAG, "address: " + address + ", latitde: " + mLatitude + ", longtitude: " + mLongitude + ", address: " + mFormattedAddress);
 
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}		
-	
-	private void searchLocationGoogle(String address) {
 		
-		try {
-			HttpClient Client = new DefaultHttpClient();
-				
-    		StringBuilder sb = new StringBuilder();
-    		sb.append("http://maps.google.com/maps/api/geocode/json?sensor=true&language=ko&address=").append(address);
-    		
-            HttpGet httpget = new HttpGet(sb.toString());
-            ResponseHandler<String> responseHandler = new BasicResponseHandler();
-            String SetServerString = Client.execute(httpget, responseHandler);
-            
-            Log.d(TAG, "\n========================");
-            Log.d(TAG, "\nGoogle Geocode-2");
-            Log.d(TAG, SetServerString);
-            
-		} catch(Exception e) {
-		    e.printStackTrace();
-		}
-	}
-	
 	private void searchLocation(Context context, String searchStr) {
 		Geocoder gc = new Geocoder(context, Locale.getDefault());
 		

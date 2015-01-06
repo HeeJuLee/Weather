@@ -1,5 +1,6 @@
 package com.ncsoft.platform.weather.manager;
 
+import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -9,20 +10,28 @@ import android.util.Log;
 
 import com.google.gson.Gson;
 import com.ncsoft.platform.weather.model.CurrentWeatherModel;
+import com.ncsoft.platform.weather.model.Forecast3DayModel;
 import com.ncsoft.platform.weather.model.Forecast6DayModel;
 import com.ncsoft.platform.weather.util.FileUtils;
 import com.skp.openplatform.android.sdk.api.APIRequest;
 import com.skp.openplatform.android.sdk.common.PlanetXSDKConstants.CONTENT_TYPE;
+import com.skp.openplatform.android.sdk.common.PlanetXSDKException;
 import com.skp.openplatform.android.sdk.common.RequestBundle;
 import com.skp.openplatform.android.sdk.common.ResponseMessage;
 
 public class WeatherManager {
 	private static final String TAG = "WeatherDataManager";
+	private static final String CURRENT_WEATHER_API = "http://apis.skplanetx.com/weather/current/minutely";
+	private static final String FORECAST_3DAY_API = "http://apis.skplanetx.com/weather/forecast/3days";
+	private static final String FORECAST_6DAY_API = "http://apis.skplanetx.com/weather/forecast/6days";
+	
 	private static WeatherManager mWeatherManager;
 	
 	private Context mContext;
 	private ArrayList<CurrentWeatherModel> mCurrentWeatherList;
 
+	private String[] mAddress = {"용인시 마북동", "분당구 삼평동", "전주시 진북동", "강남구 신사동" };
+	
 	private WeatherManager(Context context) {
 		mContext = context;
 	}
@@ -53,32 +62,46 @@ public class WeatherManager {
 	
 	private void loadCurrentWeatherList() {
 		mCurrentWeatherList = new ArrayList<CurrentWeatherModel>();
-		
-		String[] address = {"용인시 마북동", "분당구 삼평동", "전주시 진북동", "강남구 신사동" };
-		
+				
 		GeocodeManager gm = new GeocodeManager();
 		
-		for(int i = 0; i < address.length; i++) {
-			gm.getLocationInfo(address[i]);
+		for(int i = 0; i < mAddress.length; i++) {
+			gm.getLocationInfo(mAddress[i]);
 			
-			CurrentWeatherModel current = getCurrentWeather(gm.getLatitude(), gm.getLongitude());
+			CurrentWeatherModel current = getWeatherFromSKPlanet(CURRENT_WEATHER_API, gm.getLatitude(), gm.getLongitude(), CurrentWeatherModel.class);
 			mCurrentWeatherList.add(current);
 			
 			Log.d(TAG, current.toString());
 		}
 	}
 	
-	private CurrentWeatherModel getCurrentWeather(double latitude, double longitude) {
+	public Forecast3DayModel getForecast3DayWeather(double latitude, double longitude) {
+		
+		Forecast3DayModel forecast = getWeatherFromSKPlanet(FORECAST_3DAY_API, latitude, longitude, Forecast3DayModel.class);
+			
+		Log.d(TAG, forecast.toString());
+		
+		return forecast;
+	}	
+	
+	public Forecast6DayModel getForecast6DayWeather(double latitude, double longitude) {
+			
+		Forecast6DayModel forecast = getWeatherFromSKPlanet(FORECAST_6DAY_API, latitude, longitude, Forecast6DayModel.class);
+			
+		Log.d(TAG, forecast.toString());
+		
+		return forecast;
+	}
+	
+	private <T> T getWeatherFromSKPlanet(String url, double latitude, double longitude, Type typeOfT) {
 		try {
-			String URL = "http://apis.skplanetx.com/weather/current/minutely";
-							 
 			Map<String, Object> param = new HashMap<String, Object>();
 			param.put("version", "1");
 			param.put("lat", latitude);
 			param.put("lon", longitude);
 			 
 			RequestBundle req = new RequestBundle();
-			req.setUrl(URL);
+			req.setUrl(url);
 			req.setParameters(param);
 			req.setResponseType(CONTENT_TYPE.JSON);
 			 
@@ -88,46 +111,16 @@ public class WeatherManager {
 		    if(result.getStatusCode().equalsIgnoreCase("200")) {
 		    	Gson gson = new Gson(); 
 				
-		    	return gson.fromJson(result.toString(), CurrentWeatherModel.class);
+		    	return gson.fromJson(result.toString(), typeOfT);
 		    }
-		} catch(Exception e) {
+		} catch(PlanetXSDKException e) {
 			e.printStackTrace();
 		}
 		
 		return null;
 	}
 	
-	private Forecast6DayModel getForecast6Days(double latitude, double longitude) {
-		try {
-			String URL = "http://apis.skplanetx.com/weather/forecast/6days";
-							 
-			Map<String, Object> param = new HashMap<String, Object>();
-			param.put("version", "1");
-			param.put("lat", latitude);
-			param.put("lon", longitude);
-			 
-			RequestBundle req = new RequestBundle();
-			req.setUrl(URL);
-			req.setParameters(param);
-			req.setResponseType(CONTENT_TYPE.JSON);
-			 
-			APIRequest api = new APIRequest();
-		    ResponseMessage result = api.request(req);
-		    
-		    if(result.getStatusCode().equalsIgnoreCase("200")) {
-		    	Gson gson = new Gson(); 
-				
-		    	return gson.fromJson(result.toString(), Forecast6DayModel.class);
-		    }
-		} catch(Exception e) {
-			e.printStackTrace();
-		}
-		
-		return null;
-	}
-	
-
-	private CurrentWeatherModel getCurrentWeatherFromJson() {
+	protected CurrentWeatherModel currentWeatherModelFromJson() {
 		Gson gson = new Gson(); 
 		
 		String result = FileUtils.getFileFromAssets(mContext, "current_weather_response.json");
@@ -135,15 +128,12 @@ public class WeatherManager {
 		return gson.fromJson(result, CurrentWeatherModel.class);
 	}
 	
-	
-	private Forecast6DayModel getForecastWeekFromJson() {
+	protected Forecast6DayModel forecast6DayModelFromJson() {
 		Gson gson = new Gson(); 
 		
-		String result = FileUtils.getFileFromAssets(mContext, "forecast_week_response.json");
+		String result = FileUtils.getFileFromAssets(mContext, "forecast_6day_response.json");
 		
 		return gson.fromJson(result, Forecast6DayModel.class);
 	}
-
-	
 	
 }

@@ -103,7 +103,6 @@ public class WeatherListFragment extends ListFragment {
 			    e.printStackTrace();
 			    mHandler.sendEmptyMessage(0);
 			}
-
 		}
 	}
 }
