@@ -1,13 +1,67 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical" >
-    
-    <TextView android:id="@+id/list_weather_item_textview"
-	    android:layout_width="match_parent"
-	    android:layout_height="wrap_content"
-	    android:paddingLeft="4dp"
-	    android:paddingRight="4dp" />
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/list_selector"
+    android:orientation="horizontal"
+    android:padding="5dp" >
 
-</LinearLayout>
+    <LinearLayout
+        android:id="@+id/list_weather_item_thumbnail"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_marginRight="5dip"
+        android:background="@drawable/image_bg"
+        android:padding="3dip" >
+
+        <ImageView
+            android:id="@+id/list_weather_item_image"
+            android:layout_width="50dip"
+            android:layout_height="50dip"
+            android:src="@drawable/weather05" />
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/list_weather_item_address"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@id/list_weather_item_thumbnail"
+        android:layout_toRightOf="@id/list_weather_item_thumbnail"
+        android:text="서울특별시 반포구"
+        android:textColor="#040404"
+        android:textSize="15dip"
+        android:textStyle="bold"
+        android:typeface="sans" />
+
+    <TextView
+        android:id="@+id/list_weather_item_temperature"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@id/list_weather_item_thumbnail"
+        android:layout_toRightOf="@id/list_weather_item_thumbnail"
+        android:text="현재기온"
+        android:textColor="#10bcc9"
+        android:textSize="28dip" />
+
+    <TextView
+        android:id="@+id/list_weather_item_min_max"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/list_weather_item_temperature"
+        android:layout_toRightOf="@+id/list_weather_item_temperature"
+        android:text="최저 최고"
+        android:textColor="#343434"
+        android:textSize="14dip" />
+    
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:src="@drawable/arrow" />
+
+    
+
+</RelativeLayout>

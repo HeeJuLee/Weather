@@ -2,7 +2,6 @@ package com.ncsoft.platform.weather;
 
 import java.util.ArrayList;
 
-import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -16,7 +15,6 @@ import android.widget.Toast;
 import com.ncsoft.platform.weather.manager.WeatherManager;
 import com.ncsoft.platform.weather.model.CurrentWeatherModel;
 import com.ncsoft.platform.weather.model.Forecast3DayModel;
-import com.ncsoft.platform.weather.model.Forecast3DayModel.Forecast3days;
 import com.ncsoft.platform.weather.model.Forecast6DayModel;
 
 public class ForecastFragment extends Fragment {

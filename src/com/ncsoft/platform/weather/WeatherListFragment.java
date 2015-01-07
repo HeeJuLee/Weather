@@ -9,7 +9,6 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.support.v4.app.ListFragment;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -93,11 +92,15 @@ public class WeatherListFragment extends ListFragment {
 				convertView = getActivity().getLayoutInflater().inflate(R.layout.list_weather_item, null);
 			}
 			
-			if(mCurrentWeatherList != null) {
-				CurrentWeatherModel current = getItem(position);
-				
-				TextView textView = (TextView) convertView.findViewById(R.id.list_weather_item_textview);
-				textView.setText(current.toString());
+			if(mCurrentWeatherList != null) {				
+				TextView address = (TextView) convertView.findViewById(R.id.list_weather_item_address);
+				TextView temperature = (TextView) convertView.findViewById(R.id.list_weather_item_temperature);
+				TextView minmax = (TextView) convertView.findViewById(R.id.list_weather_item_min_max);
+
+				CurrentWeatherModel current = getItem(position);				
+				address.setText(current.getStation());
+				temperature.setText(current.getTc());
+				minmax.setText("최저: " + current.getTmin() + ", 최고: " + current.getTmax());
 			}
 			
 			return convertView;

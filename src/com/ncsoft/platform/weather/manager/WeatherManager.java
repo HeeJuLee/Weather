@@ -30,7 +30,7 @@ public class WeatherManager {
 	private Context mContext;
 	private ArrayList<CurrentWeatherModel> mCurrentWeatherList;
 
-	private String[] mAddress = {"용인시 마북동", "분당구 삼평동", "전주시 진북동", "강남구 신사동" };
+	private String[] mAddress = {"경기도 용인시", "경기도 성남시", "전북 전주시", "서울특별시 강남구" };
 	
 	private WeatherManager(Context context) {
 		mContext = context;
@@ -64,6 +64,8 @@ public class WeatherManager {
 		mCurrentWeatherList = new ArrayList<CurrentWeatherModel>();
 				
 		GeocodeManager gm = new GeocodeManager();
+		
+		APIRequest.setAppKey("12f6c0f5-f4f9-3268-af97-f3c9a65a7f36");
 		
 		for(int i = 0; i < mAddress.length; i++) {
 			gm.getLocationInfo(mAddress[i]);

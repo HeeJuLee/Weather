@@ -3,8 +3,6 @@ package com.ncsoft.platform.weather.model;
 import java.util.Iterator;
 import java.util.List;
 
-import android.util.Log;
-
 /* 
  * 현재날씨(분별)
  */
@@ -53,6 +51,50 @@ public class CurrentWeatherModel {
 		return sb.toString();
 	}
 	
+	public String getStation() {
+		List<Minutely> minutelys = weather.getMinutely();
+		
+		Iterator<Minutely> iterator = minutelys.iterator();
+		while(iterator.hasNext()) {
+			Minutely minutely = iterator.next();
+			
+			return minutely.getStation().getName();
+		}
+		return "";
+	}
+	public String getTc() {
+		List<Minutely> minutelys = weather.getMinutely();
+		
+		Iterator<Minutely> iterator = minutelys.iterator();
+		while(iterator.hasNext()) {
+			Minutely minutely = iterator.next();
+			
+			return minutely.getTemperature().getTc();
+		}
+		return "";
+	}
+	public String getTmax() {
+		List<Minutely> minutelys = weather.getMinutely();
+		
+		Iterator<Minutely> iterator = minutelys.iterator();
+		while(iterator.hasNext()) {
+			Minutely minutely = iterator.next();
+			
+			return minutely.getTemperature().getTmax();
+		}
+		return "";
+	}
+	public String getTmin() {
+		List<Minutely> minutelys = weather.getMinutely();
+		
+		Iterator<Minutely> iterator = minutelys.iterator();
+		while(iterator.hasNext()) {
+			Minutely minutely = iterator.next();
+			
+			return minutely.getTemperature().getTmin();
+		}
+		return "";
+	}
 	public double getLatitude() {
 		List<Minutely> minutelys = weather.getMinutely();
 		
