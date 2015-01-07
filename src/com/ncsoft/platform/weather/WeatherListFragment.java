@@ -3,11 +3,16 @@ package com.ncsoft.platform.weather;
 import java.util.ArrayList;
 
 import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.support.v4.app.ListFragment;
+import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
@@ -29,9 +34,17 @@ public class WeatherListFragment extends ListFragment {
 		super.onCreate(savedInstanceState);
 		
 		getActivity().setTitle(R.string.weather_list);
+		setHasOptionsMenu(true);
 		
 		WorkerThread thread = new WorkerThread(new WeatherHandler());
 		thread.start();
+	}
+	
+	@Override
+	public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+		super.onCreateOptionsMenu(menu, inflater);
+		
+		inflater.inflate(R.menu.weather, menu);
 	}
 	
 	@Override
@@ -44,9 +57,32 @@ public class WeatherListFragment extends ListFragment {
 		startActivity(intent);
 	}
 	
-	private class WeatherAdapter extends ArrayAdapter<CurrentWeatherModel> {
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+		switch(item.getItemId()) {
+		case R.id.menu_item_add:
+			Intent intent = new Intent(getActivity(), AddressListActivity.class);
+			startActivityForResult(intent, 10);
+			return true;
+		default:
+			return super.onOptionsItemSelected(item);
+		}
+	}
+	
+	@Override
+	public void onActivityResult(int requestCode, int resultCode, Intent data) {
+		super.onActivityResult(requestCode, resultCode, data);
 		
-		public WeatherAdapter(ArrayList<CurrentWeatherModel> weatherList) {
+		if(resultCode == Activity.RESULT_OK) {
+			if(requestCode == 10) {
+				Toast.makeText(getActivity(), data.getStringExtra(AddressListActivity.SELECT_ADDRESS), Toast.LENGTH_SHORT).show();
+			}
+		}
+	}
+	
+	private class WeatherListAdapter extends ArrayAdapter<CurrentWeatherModel> {
+		
+		public WeatherListAdapter(ArrayList<CurrentWeatherModel> weatherList) {
 			super(getActivity(), android.R.layout.simple_list_item_1, weatherList);
 		}
 		
@@ -68,15 +104,14 @@ public class WeatherListFragment extends ListFragment {
 			//return super.getView(position, convertView, parent);
 		}
 	}
-	
-	
+		
 	@SuppressLint("HandlerLeak")
 	private class WeatherHandler extends Handler {
 		@Override
 		public void handleMessage(Message msg) {
 			
 			if(msg.what == 1)
-				setListAdapter(new WeatherAdapter(mCurrentWeatherList));				
+				setListAdapter(new WeatherListAdapter(mCurrentWeatherList));				
 			else
 				Toast.makeText(getActivity(), "FAIL: Weather is not loaded", Toast.LENGTH_SHORT).show();
 			

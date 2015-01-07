@@ -20,7 +20,7 @@ import com.ncsoft.platform.weather.model.Forecast3DayModel.Forecast3days;
 import com.ncsoft.platform.weather.model.Forecast6DayModel;
 
 public class ForecastFragment extends Fragment {
-	public static final String EXTRA_POSITION = "com.ncsoft.platform.weather.extra_position"; 
+	public static final String EXTRA_POSITION = "extra_position"; 
 	
 	private int mPos = 0;
 	private Forecast3DayModel mForecast3Day;

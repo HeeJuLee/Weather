@@ -6,6 +6,7 @@ import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.io.OutputStreamWriter;
 import java.io.Writer;
+import java.util.ArrayList;
 
 import android.content.Context;
 
@@ -25,6 +26,22 @@ public  class FileUtils {
             e.printStackTrace();
             return null;
         }
+    } 
+	
+	public static ArrayList<String> getStringArrayFromAssets(Context context, String fileName) {
+		ArrayList<String> array = new ArrayList<String>();
+		
+		try {
+            InputStreamReader in = new InputStreamReader(context.getResources().getAssets().open(fileName));
+            BufferedReader br = new BufferedReader(in);
+            String line;
+            while ((line = br.readLine()) != null) {
+                array.add(line);
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+		return array;
     } 
 
 	public static void writeToFile(Context context, String content, String filename) throws IOException {
