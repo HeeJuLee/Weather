@@ -3,6 +3,8 @@ package com.ncsoft.platform.weather.model;
 import java.util.Iterator;
 import java.util.List;
 
+import com.ncsoft.platform.weather.R;
+
 /* 
  * ÇöÀç³¯¾¾(ºÐº°)
  */
@@ -20,6 +22,138 @@ public class CurrentWeatherModel {
 	}
 	public Weather getWeather() {
 		return weather;
+	}
+	
+	public String getStation() {
+		List<Minutely> minutelys = weather.getMinutely();
+		
+		Iterator<Minutely> iterator = minutelys.iterator();
+		while(iterator.hasNext()) {
+			Minutely minutely = iterator.next();
+			
+			return minutely.getStation().getName();
+		}
+		return "";
+	}
+	
+	public int getTc() {
+		List<Minutely> minutelys = weather.getMinutely();
+		
+		Iterator<Minutely> iterator = minutelys.iterator();
+		while(iterator.hasNext()) {
+			Minutely minutely = iterator.next();
+			
+			return Math.round(Float.parseFloat(minutely.getTemperature().getTc()));
+		}
+		return -999;
+	}
+	
+	public int getTmax() {
+		List<Minutely> minutelys = weather.getMinutely();
+		
+		Iterator<Minutely> iterator = minutelys.iterator();
+		while(iterator.hasNext()) {
+			Minutely minutely = iterator.next();
+			
+			return Math.round(Float.parseFloat(minutely.getTemperature().getTmax()));
+		}
+		return -999;
+	}
+	
+	public int getTmin() {
+		List<Minutely> minutelys = weather.getMinutely();
+		
+		Iterator<Minutely> iterator = minutelys.iterator();
+		while(iterator.hasNext()) {
+			Minutely minutely = iterator.next();
+			
+			return Math.round(Float.parseFloat(minutely.getTemperature().getTmin()));
+		}
+		return -999;
+	}
+	
+	public double getLatitude() {
+		List<Minutely> minutelys = weather.getMinutely();
+		
+		Iterator<Minutely> iterator = minutelys.iterator();
+		while(iterator.hasNext()) {
+			Minutely minutely = iterator.next();
+			
+			return Double.parseDouble(minutely.getStation().getLatitude());
+		}
+		return 0;
+	}
+	
+	public double getLongitude() {
+		List<Minutely> minutelys = weather.getMinutely();
+		
+		Iterator<Minutely> iterator = minutelys.iterator();
+		while(iterator.hasNext()) {
+			Minutely minutely = iterator.next();
+			
+			return Double.parseDouble(minutely.getStation().getLongitude());
+		}
+		return 0;
+	}
+	
+	public String getSkyName() {
+		List<Minutely> minutelys = weather.getMinutely();
+		
+		Iterator<Minutely> iterator = minutelys.iterator();
+		while(iterator.hasNext()) {
+			Minutely minutely = iterator.next();
+			
+			return minutely.getSky().getName();
+		}
+		return "";
+	}
+	
+	/*
+	ÇÏ´Ã»óÅÂÄÚµå¸í
+	- SKY_A01: ¸¼À½
+	- SKY_A02: ±¸¸§Á¶±Ý
+	- SKY_A03: ±¸¸§¸¹À½
+	- SKY_A04: ±¸¸§¸¹°í ºñ
+	- SKY_A05: ±¸¸§¸¹°í ´«
+	- SKY_A06: ±¸¸§¸¹°í ºñ ¶Ç´Â ´«
+	- SKY_A07: Èå¸²
+	- SKY_A08: Èå¸®°í ºñ
+	- SKY_A09: Èå¸®°í ´«
+	- SKY_A10:  Èå¸®°í ºñ ¶Ç´Â ´«
+	- SKY_A11: Èå¸®°í ³«·Ú
+	- SKY_A12: ³ú¿ì, ºñ
+	- SKY_A13: ³ú¿ì, ´«
+	- SKY_A14: ³ú¿ì, ºñ ¶Ç´Â ´«
+	*/
+	public int getSkyResourceID() {
+		List<Minutely> minutelys = weather.getMinutely();
+		
+		Iterator<Minutely> iterator = minutelys.iterator();
+		while(iterator.hasNext()) {
+			Minutely minutely = iterator.next();
+			
+			String code = minutely.getSky().getCode();
+			if(code.length() == 7) {
+				switch(Integer.parseInt(code.substring(5))) {
+					case 1: return R.drawable.weather01;
+					case 2: return R.drawable.weather02;
+					case 3: return R.drawable.weather03;
+					case 4: return R.drawable.weather12;
+					case 5: return R.drawable.weather13;
+					case 6: return R.drawable.weather14;
+					case 7: return R.drawable.weather18;
+					case 8: return R.drawable.weather21;
+					case 9: return R.drawable.weather32;
+					case 10: return R.drawable.weather04;
+					case 11: return R.drawable.weather29;
+					case 12: return R.drawable.weather26;
+					case 13: return R.drawable.weather27;
+					case 14: return R.drawable.weather28;
+					default: return R.drawable.weather01;			
+				}		
+			}
+		}
+		return R.drawable.weather01;
 	}
 	
 	public String toString() {
@@ -49,73 +183,6 @@ public class CurrentWeatherModel {
 			sb.append("\n°üÃø½Ã°£: " + minutely.getTimeObservation());
 		}
 		return sb.toString();
-	}
-	
-	public String getStation() {
-		List<Minutely> minutelys = weather.getMinutely();
-		
-		Iterator<Minutely> iterator = minutelys.iterator();
-		while(iterator.hasNext()) {
-			Minutely minutely = iterator.next();
-			
-			return minutely.getStation().getName();
-		}
-		return "";
-	}
-	public String getTc() {
-		List<Minutely> minutelys = weather.getMinutely();
-		
-		Iterator<Minutely> iterator = minutelys.iterator();
-		while(iterator.hasNext()) {
-			Minutely minutely = iterator.next();
-			
-			return minutely.getTemperature().getTc();
-		}
-		return "";
-	}
-	public String getTmax() {
-		List<Minutely> minutelys = weather.getMinutely();
-		
-		Iterator<Minutely> iterator = minutelys.iterator();
-		while(iterator.hasNext()) {
-			Minutely minutely = iterator.next();
-			
-			return minutely.getTemperature().getTmax();
-		}
-		return "";
-	}
-	public String getTmin() {
-		List<Minutely> minutelys = weather.getMinutely();
-		
-		Iterator<Minutely> iterator = minutelys.iterator();
-		while(iterator.hasNext()) {
-			Minutely minutely = iterator.next();
-			
-			return minutely.getTemperature().getTmin();
-		}
-		return "";
-	}
-	public double getLatitude() {
-		List<Minutely> minutelys = weather.getMinutely();
-		
-		Iterator<Minutely> iterator = minutelys.iterator();
-		while(iterator.hasNext()) {
-			Minutely minutely = iterator.next();
-			
-			return Double.parseDouble(minutely.getStation().getLatitude());
-		}
-		return 0;
-	}
-	public double getLongitude() {
-		List<Minutely> minutelys = weather.getMinutely();
-		
-		Iterator<Minutely> iterator = minutelys.iterator();
-		while(iterator.hasNext()) {
-			Minutely minutely = iterator.next();
-			
-			return Double.parseDouble(minutely.getStation().getLongitude());
-		}
-		return 0;
 	}
 		
 	// ¿äÃ»°á°ú

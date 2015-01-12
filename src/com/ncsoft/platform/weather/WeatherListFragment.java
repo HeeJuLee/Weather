@@ -15,6 +15,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -92,15 +93,24 @@ public class WeatherListFragment extends ListFragment {
 				convertView = getActivity().getLayoutInflater().inflate(R.layout.list_weather_item, null);
 			}
 			
-			if(mCurrentWeatherList != null) {				
+			if(mCurrentWeatherList != null) {
+				ImageView image = (ImageView) convertView.findViewById(R.id.list_weather_item_image);
 				TextView address = (TextView) convertView.findViewById(R.id.list_weather_item_address);
 				TextView temperature = (TextView) convertView.findViewById(R.id.list_weather_item_temperature);
+				TextView skyname = (TextView) convertView.findViewById(R.id.list_weather_item_skyname);
 				TextView minmax = (TextView) convertView.findViewById(R.id.list_weather_item_min_max);
 
 				CurrentWeatherModel current = getItem(position);				
 				address.setText(current.getStation());
-				temperature.setText(current.getTc());
-				minmax.setText("최저: " + current.getTmin() + ", 최고: " + current.getTmax());
+				image.setImageResource(current.getSkyResourceID());
+				
+				String format = getResources().getString(R.string.current_temperature_format);
+				temperature.setText(String.format(format, current.getTc()));
+
+				skyname.setText(current.getSkyName());
+				
+				format = getResources().getString(R.string.minmax_temperature_format);
+				minmax.setText(String.format(format, current.getTmin(), current.getTmax()));
 			}
 			
 			return convertView;

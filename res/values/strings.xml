@@ -8,6 +8,9 @@
     <string name="forecast_is_null">Load Success but Forecast is null</string>
     <string name="forecast_load_exception">Exception! Forecast is not loaded</string>
     <string name="add">추가</string>
+    
+    <string name="current_temperature_format" formatted="false">%2d&#176;</string>
+    <string name="minmax_temperature_format" formatted="false">최저: %d&#176; 최고: %d&#176;</string>
 <!--
     <string name="action_settings">Settings</string>
 
