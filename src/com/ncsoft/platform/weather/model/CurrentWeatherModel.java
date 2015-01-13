@@ -10,10 +10,18 @@ import com.ncsoft.platform.weather.R;
  */
 public class CurrentWeatherModel {
 
+	private String mAddress;
+	
 	private Result result;		
 	private Common common;		
 	private Weather weather;
 		
+	public String getAddress() {
+		return mAddress;
+	}
+	public void setAddress(String address) {
+		mAddress = address;
+	}
 	public Result getResult() {
 		return result;
 	}

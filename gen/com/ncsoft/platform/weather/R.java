@@ -102,11 +102,12 @@ public final class R {
     }
     public static final class string {
         public static final int action_settings=0x7f050002;
-        public static final int add=0x7f050006;
+        public static final int add_address=0x7f050004;
         public static final int app_name=0x7f050000;
         public static final int current_temperature_format=0x7f050007;
-        public static final int forecast_is_null=0x7f050004;
-        public static final int forecast_load_exception=0x7f050005;
+        public static final int error_string_format=0x7f050009;
+        public static final int forecast_is_null=0x7f050005;
+        public static final int forecast_load_exception=0x7f050006;
         public static final int hello_world=0x7f050001;
         public static final int minmax_temperature_format=0x7f050008;
         public static final int weather_list=0x7f050003;

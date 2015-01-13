@@ -2,6 +2,7 @@ package com.ncsoft.platform.weather;
 
 import java.util.ArrayList;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -48,17 +49,17 @@ public class ForecastFragment extends Fragment {
 		currentweather.setText(current.toString());
 		
 		return v;
-		//return super.onCreateView(inflater, container, savedInstanceState);
 	}
-	
+
 	private Handler mHandler = new Handler() {
 		@Override
 		public void handleMessage(Message msg) {
 			
 			if(msg.what == 1) {
 				if(mForecast3Day != null && mForecast6Day != null) {
-					TextView forecast3day = (TextView) getView().findViewById(R.id.fragment_forecast_textview_forecast3day);
-					TextView forecast6day = (TextView) getView().findViewById(R.id.fragment_forecast_textview_forecast6day);
+					View v = getView();
+					TextView forecast3day = (TextView) v.findViewById(R.id.fragment_forecast_textview_forecast3day);
+					TextView forecast6day = (TextView) v.findViewById(R.id.fragment_forecast_textview_forecast6day);
 					forecast3day.setText(mForecast3Day.toString());
 					forecast6day.setText(mForecast6Day.toString());
 				}
@@ -67,8 +68,6 @@ public class ForecastFragment extends Fragment {
 			}
 			else
 				Toast.makeText(getActivity(), R.string.forecast_load_exception, Toast.LENGTH_SHORT).show();
-		    
-			//super.handleMessage(msg);
 		}
 	};
 	

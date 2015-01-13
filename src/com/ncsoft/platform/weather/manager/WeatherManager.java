@@ -30,10 +30,12 @@ public class WeatherManager {
 	private Context mContext;
 	private ArrayList<CurrentWeatherModel> mCurrentWeatherList;
 
-	private String[] mAddress = {"경기도 용인시", "경기도 성남시", "전북 전주시", "서울특별시 강남구" };
+	private ArrayList<String> mAddress;
 	
 	private WeatherManager(Context context) {
 		mContext = context;
+		mAddress = new ArrayList<String>();
+		mAddress.add("성남시 분당구");
 	}
 	
 	public static WeatherManager getInstance(Context context) {
@@ -46,35 +48,57 @@ public class WeatherManager {
         return mWeatherManager;
     }
 	
+	public ArrayList<CurrentWeatherModel> addCurrentWeather(String address) {
+		mAddress.add(address);
+		
+		if(mCurrentWeatherList == null) {
+			getCurrentWeatherList();
+		}
+		else {
+			GeocodeManager gm = new GeocodeManager();
+			gm.getLocationInfo(address);
+			
+			CurrentWeatherModel current = getCurrentWeather(gm.getLatitude(), gm.getLongitude());
+			current.setAddress(address);
+			
+			mCurrentWeatherList.add(current);
+		}
+		return mCurrentWeatherList;
+	}
+	
 	public ArrayList<CurrentWeatherModel> getCurrentWeatherList() {
 		if(mCurrentWeatherList == null)
-			loadCurrentWeatherList();
+			getCurrentWeatherList(false);
 		
 		return mCurrentWeatherList;
 	}
 	
 	public ArrayList<CurrentWeatherModel> getCurrentWeatherList(boolean reload) {
 		if(mCurrentWeatherList == null || reload == true)
-			loadCurrentWeatherList();
-		
+		{
+			mCurrentWeatherList = new ArrayList<CurrentWeatherModel>();
+			
+			GeocodeManager gm = new GeocodeManager();
+			
+			for(int i = 0; i < mAddress.size(); i++) {
+				gm.getLocationInfo(mAddress.get(i));
+				
+				CurrentWeatherModel current = getCurrentWeather(gm.getLatitude(), gm.getLongitude());
+				current.setAddress(mAddress.get(i));
+				
+				mCurrentWeatherList.add(current);
+			}
+		}
 		return mCurrentWeatherList;
 	}
 	
-	private void loadCurrentWeatherList() {
-		mCurrentWeatherList = new ArrayList<CurrentWeatherModel>();
-				
-		GeocodeManager gm = new GeocodeManager();
+	public CurrentWeatherModel getCurrentWeather(double latitude, double longitude) {
 		
-		APIRequest.setAppKey("12f6c0f5-f4f9-3268-af97-f3c9a65a7f36");
+		CurrentWeatherModel current = getWeatherFromSKPlanet(CURRENT_WEATHER_API, latitude, longitude, CurrentWeatherModel.class);
 		
-		for(int i = 0; i < mAddress.length; i++) {
-			gm.getLocationInfo(mAddress[i]);
-			
-			CurrentWeatherModel current = getWeatherFromSKPlanet(CURRENT_WEATHER_API, gm.getLatitude(), gm.getLongitude(), CurrentWeatherModel.class);
-			mCurrentWeatherList.add(current);
-			
-			Log.d(TAG, current.toString());
-		}
+		Log.d(TAG, current.toString());
+		
+		return current;
 	}
 	
 	public Forecast3DayModel getForecast3DayWeather(double latitude, double longitude) {
@@ -84,7 +108,7 @@ public class WeatherManager {
 		Log.d(TAG, forecast.toString());
 		
 		return forecast;
-	}	
+	}
 	
 	public Forecast6DayModel getForecast6DayWeather(double latitude, double longitude) {
 			

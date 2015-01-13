@@ -49,12 +49,24 @@
         android:layout_height="wrap_content"
         android:layout_above="@+id/list_weather_item_skyname"
         android:layout_alignBottom="@+id/list_weather_item_temperature"
-        android:layout_marginLeft="2dp"
+        android:layout_marginLeft="4dp"
         android:layout_toRightOf="@+id/list_weather_item_temperature"
         android:text="최저기온, 최고기온"
         android:textColor="#343434"
         android:textSize="12dp" />
 
+    <TextView
+        android:id="@+id/list_weather_item_skyname"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/list_weather_item_min_max"
+        android:layout_alignBottom="@+id/list_weather_item_temperature"
+        android:layout_marginBottom="16dp"
+        android:text="하늘상태"
+        android:textColor="#343434"
+        android:textSize="12dp" />
+
+    
     <ImageView
         android:id="@+id/imageView1"
         android:layout_width="wrap_content"
@@ -62,15 +74,5 @@
         android:layout_alignParentRight="true"
         android:layout_centerVertical="true"
         android:src="@drawable/arrow" />
-
-    <TextView
-        android:id="@+id/list_weather_item_skyname"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/list_weather_item_min_max"
-        android:layout_centerVertical="true"
-        android:text="하늘상태"
-        android:textColor="#343434"
-        android:textSize="12dp" />
-
+    
 </RelativeLayout>

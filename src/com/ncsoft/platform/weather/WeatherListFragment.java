@@ -26,8 +26,14 @@ import com.ncsoft.platform.weather.model.CurrentWeatherModel;
 public class WeatherListFragment extends ListFragment {
 
 	private static final String TAG = "WeatherListFragment";
-	private ArrayList<CurrentWeatherModel> mCurrentWeatherList;
+	private static final int WEATHERLIST_FAIL = 0;
+	private static final int WEATHERLIST_INIT = 1;
+	private static final int WEATHERLIST_RELOAD = 2;
+	private static final int WEATHERLIST_ADD= 3;
 	
+	private ArrayList<CurrentWeatherModel> mCurrentWeatherList;
+	private String mSelectAddress;
+	private WeatherListAdapter mWeatherListAdapter;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -36,7 +42,7 @@ public class WeatherListFragment extends ListFragment {
 		getActivity().setTitle(R.string.weather_list);
 		setHasOptionsMenu(true);
 		
-		WorkerThread thread = new WorkerThread(new WeatherHandler());
+		WorkerThread thread = new WorkerThread(new WeatherHandler(), WEATHERLIST_INIT);
 		thread.start();
 	}
 	
@@ -76,6 +82,11 @@ public class WeatherListFragment extends ListFragment {
 		if(resultCode == Activity.RESULT_OK) {
 			if(requestCode == 10) {
 				Toast.makeText(getActivity(), data.getStringExtra(AddressListActivity.SELECT_ADDRESS), Toast.LENGTH_SHORT).show();
+				
+				mSelectAddress = data.getStringExtra(AddressListActivity.SELECT_ADDRESS);
+				
+				WorkerThread thread = new WorkerThread(new WeatherHandler(), WEATHERLIST_ADD);
+				thread.start();
 			}
 		}
 	}
@@ -100,8 +111,9 @@ public class WeatherListFragment extends ListFragment {
 				TextView skyname = (TextView) convertView.findViewById(R.id.list_weather_item_skyname);
 				TextView minmax = (TextView) convertView.findViewById(R.id.list_weather_item_min_max);
 
-				CurrentWeatherModel current = getItem(position);				
-				address.setText(current.getStation());
+				CurrentWeatherModel current = getItem(position);
+				//address.setText(current.getAddress() + "(" + current.getStation() + ")");
+				address.setText(current.getAddress());
 				image.setImageResource(current.getSkyResourceID());
 				
 				String format = getResources().getString(R.string.current_temperature_format);
@@ -114,7 +126,6 @@ public class WeatherListFragment extends ListFragment {
 			}
 			
 			return convertView;
-			//return super.getView(position, convertView, parent);
 		}
 	}
 		
@@ -123,10 +134,19 @@ public class WeatherListFragment extends ListFragment {
 		@Override
 		public void handleMessage(Message msg) {
 			
-			if(msg.what == 1)
-				setListAdapter(new WeatherListAdapter(mCurrentWeatherList));				
-			else
-				Toast.makeText(getActivity(), "FAIL: Weather is not loaded", Toast.LENGTH_SHORT).show();
+			switch(msg.what) {
+				case WEATHERLIST_INIT:
+					mWeatherListAdapter = new WeatherListAdapter(mCurrentWeatherList);
+					setListAdapter(mWeatherListAdapter);
+					break;
+				case WEATHERLIST_RELOAD:
+					break;
+				case WEATHERLIST_ADD:
+					mWeatherListAdapter.notifyDataSetChanged();
+					break;
+				default:
+					Toast.makeText(getActivity(), "FAIL: Weather is not loaded", Toast.LENGTH_SHORT).show();
+			}
 			
 		    super.handleMessage(msg);
 		}
@@ -134,22 +154,36 @@ public class WeatherListFragment extends ListFragment {
 
 	private class WorkerThread extends Thread {
 		Handler mHandler;
+		int mActionType = 0;
 
-		public WorkerThread(Handler handler) {
+		public WorkerThread(Handler handler, int type) {
 			mHandler = handler;
+			mActionType = type;
 		}
 
 		@Override
 		public void run() {
 			try {
 				WeatherManager weatherManager = WeatherManager.getInstance(getActivity());
-				mCurrentWeatherList = weatherManager.getCurrentWeatherList();
 				
-				mHandler.sendEmptyMessage(1);
-				//Message.obtain(mHandler, 1, result).sendToTarget();				
+				switch(mActionType) {
+					case WEATHERLIST_INIT:
+						mCurrentWeatherList = weatherManager.getCurrentWeatherList();
+						break;
+					case WEATHERLIST_RELOAD:
+						mCurrentWeatherList = weatherManager.getCurrentWeatherList(true);
+						break;
+					case WEATHERLIST_ADD:
+						mCurrentWeatherList = weatherManager.addCurrentWeather(mSelectAddress);
+						break;
+					default:
+						break;
+				}
+				
+				mHandler.sendEmptyMessage(mActionType);				
 			} catch(Exception e) {
 			    e.printStackTrace();
-			    mHandler.sendEmptyMessage(0);
+			    mHandler.sendEmptyMessage(WEATHERLIST_FAIL);
 			}
 		}
 	}

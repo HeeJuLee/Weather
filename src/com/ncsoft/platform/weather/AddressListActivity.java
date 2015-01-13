@@ -31,9 +31,9 @@ public class AddressListActivity extends Activity {
 		ListView listView = (ListView) findViewById(R.id.fragment_address_listview);
 		EditText editText = (EditText) findViewById(R.id.fragment_address_search);
 		
-		ArrayList<String> arrayList = FileUtils.getStringArrayFromAssets(this, "address_list.txt");
+		ArrayList<String> addressList = FileUtils.getStringArrayFromAssets(this, "address_list.txt");
 
-		mAdapter = new AddressListAdapter(this, arrayList);
+		mAdapter = new AddressListAdapter(this, addressList);
 		listView.setAdapter(mAdapter);
 		
 		
