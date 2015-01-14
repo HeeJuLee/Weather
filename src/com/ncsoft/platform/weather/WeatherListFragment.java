@@ -116,13 +116,13 @@ public class WeatherListFragment extends ListFragment {
 				address.setText(current.getAddress());
 				image.setImageResource(current.getSkyResourceID());
 				
-				String format = getResources().getString(R.string.current_temperature_format);
-				temperature.setText(String.format(format, current.getTc()));
+				String formatString = getResources().getString(R.string.current_temperature_format);
+				temperature.setText(String.format(formatString, current.getTc()));
 
 				skyname.setText(current.getSkyName());
 				
-				format = getResources().getString(R.string.minmax_temperature_format);
-				minmax.setText(String.format(format, current.getTmin(), current.getTmax()));
+				formatString = getResources().getString(R.string.minmax_temperature_format);
+				minmax.setText(String.format(formatString, current.getTmin(), current.getTmax()));
 			}
 			
 			return convertView;

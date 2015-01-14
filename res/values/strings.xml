@@ -13,4 +13,10 @@
     <string name="minmax_temperature_format" formatted="false">최저: %d&#176; 최고: %d&#176;</string>
     <string name="error_string_format" formatted="false">Error: %s</string>
         
+	<string name="weather_sky_condition">하늘상태</string>
+	<string name="weather_sky_image">하늘상태 이미지</string>
+	<string name="weather_min_max">최저기온, 최고기온</string>
+	<string name="weather_current_temperature">현재기온</string>
+	<string name="weather_address">지역명</string> 
+	
 </resources>

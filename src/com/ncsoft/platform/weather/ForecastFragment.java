@@ -10,6 +10,7 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -40,14 +41,26 @@ public class ForecastFragment extends Fragment {
 
 		View v = inflater.inflate(R.layout.fragment_forecast, container, false);
 		
-		TextView currentweather = (TextView) v.findViewById(R.id.fragment_forecast_textview_currentweather);
+		ImageView image = (ImageView) v.findViewById(R.id.fragment_forecast_image);
+		TextView temperature = (TextView) v.findViewById(R.id.fragment_forecast_temperature);
+		TextView skyname = (TextView) v.findViewById(R.id.fragment_forecast_skyname);
+		TextView minmax = (TextView) v.findViewById(R.id.fragment_forecast_minmax);
 		
 		WeatherManager weatherManager = WeatherManager.getInstance(getActivity());
 		ArrayList<CurrentWeatherModel> weatherList = weatherManager.getCurrentWeatherList();
 		CurrentWeatherModel current = weatherList.get(mPos);
-
-		currentweather.setText(current.toString());
 		
+		image.setImageResource(current.getSkyResourceID());
+		
+		String formatString = getResources().getString(R.string.current_temperature_format);
+		temperature.setText(String.format(formatString, current.getTc()));
+		skyname.setText(current.getSkyName());
+		formatString = getResources().getString(R.string.minmax_temperature_format);
+		minmax.setText(String.format(formatString, current.getTmin(), current.getTmax()));
+		
+		TextView currentweather = (TextView) v.findViewById(R.id.fragment_forecast_textview_currentweather);
+		currentweather.setText(current.toString());
+
 		return v;
 	}
 
@@ -58,6 +71,7 @@ public class ForecastFragment extends Fragment {
 			if(msg.what == 1) {
 				if(mForecast3Day != null && mForecast6Day != null) {
 					View v = getView();
+					
 					TextView forecast3day = (TextView) v.findViewById(R.id.fragment_forecast_textview_forecast3day);
 					TextView forecast6day = (TextView) v.findViewById(R.id.fragment_forecast_textview_forecast6day);
 					forecast3day.setText(mForecast3Day.toString());

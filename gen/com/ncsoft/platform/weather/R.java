@@ -75,19 +75,25 @@ public final class R {
         public static final int container=0x7f080000;
         public static final int fragment_address_listview=0x7f080002;
         public static final int fragment_address_search=0x7f080001;
-        public static final int fragment_forecast_textview_currentweather=0x7f080003;
-        public static final int fragment_forecast_textview_forecast3day=0x7f080004;
-        public static final int fragment_forecast_textview_forecast6day=0x7f080005;
-        public static final int fragment_weather_listview=0x7f080006;
-        public static final int imageView1=0x7f08000e;
-        public static final int list_address_item_textview=0x7f080007;
-        public static final int list_weather_item_address=0x7f08000a;
-        public static final int list_weather_item_image=0x7f080009;
-        public static final int list_weather_item_min_max=0x7f08000c;
-        public static final int list_weather_item_skyname=0x7f08000d;
-        public static final int list_weather_item_temperature=0x7f08000b;
-        public static final int list_weather_item_thumbnail=0x7f080008;
-        public static final int menu_item_add=0x7f08000f;
+        public static final int fragment_forecast_image=0x7f080005;
+        public static final int fragment_forecast_minmax=0x7f080007;
+        public static final int fragment_forecast_skyname=0x7f080006;
+        public static final int fragment_forecast_temperature=0x7f080008;
+        public static final int fragment_forecast_textview_currentweather=0x7f080009;
+        public static final int fragment_forecast_textview_forecast3day=0x7f08000a;
+        public static final int fragment_forecast_textview_forecast6day=0x7f08000b;
+        public static final int fragment_forecast_thumbnail=0x7f080004;
+        public static final int fragment_weather_listview=0x7f08000c;
+        public static final int imageView1=0x7f080014;
+        public static final int list_address_item_textview=0x7f08000d;
+        public static final int list_weather_item_address=0x7f080010;
+        public static final int list_weather_item_image=0x7f08000f;
+        public static final int list_weather_item_min_max=0x7f080012;
+        public static final int list_weather_item_skyname=0x7f080013;
+        public static final int list_weather_item_temperature=0x7f080011;
+        public static final int list_weather_item_thumbnail=0x7f08000e;
+        public static final int menu_item_add=0x7f080015;
+        public static final int scrollView1=0x7f080003;
     }
     public static final class layout {
         public static final int activity_container=0x7f030000;
@@ -110,7 +116,12 @@ public final class R {
         public static final int forecast_load_exception=0x7f050006;
         public static final int hello_world=0x7f050001;
         public static final int minmax_temperature_format=0x7f050008;
+        public static final int weather_address=0x7f05000e;
+        public static final int weather_current_temperature=0x7f05000d;
         public static final int weather_list=0x7f050003;
+        public static final int weather_min_max=0x7f05000c;
+        public static final int weather_sky_condition=0x7f05000a;
+        public static final int weather_sky_image=0x7f05000b;
     }
     public static final class style {
         /** 

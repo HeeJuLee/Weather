@@ -28,9 +28,9 @@
         android:layout_height="wrap_content"
         android:layout_alignTop="@id/list_weather_item_thumbnail"
         android:layout_toRightOf="@id/list_weather_item_thumbnail"
-        android:text="지역명"
+        android:text="@string/weather_address"
         android:textColor="#040404"
-        android:textSize="15dp"
+        android:textSize="15sp"
         android:textStyle="bold" />
 
     <TextView
@@ -39,9 +39,9 @@
         android:layout_height="wrap_content"
         android:layout_alignBottom="@id/list_weather_item_thumbnail"
         android:layout_toRightOf="@id/list_weather_item_thumbnail"
-        android:text="현재기온"
+        android:text="@string/weather_current_temperature"
         android:textColor="#0000cd"
-        android:textSize="32dp" />
+        android:textSize="32sp" />
 
     <TextView
         android:id="@+id/list_weather_item_min_max"
@@ -51,9 +51,9 @@
         android:layout_alignBottom="@+id/list_weather_item_temperature"
         android:layout_marginLeft="4dp"
         android:layout_toRightOf="@+id/list_weather_item_temperature"
-        android:text="최저기온, 최고기온"
+        android:text="@string/weather_min_max"
         android:textColor="#343434"
-        android:textSize="12dp" />
+        android:textSize="12sp" />
 
     <TextView
         android:id="@+id/list_weather_item_skyname"
@@ -62,9 +62,9 @@
         android:layout_alignLeft="@+id/list_weather_item_min_max"
         android:layout_alignBottom="@+id/list_weather_item_temperature"
         android:layout_marginBottom="16dp"
-        android:text="하늘상태"
+        android:text="@string/weather_sky_condition"
         android:textColor="#343434"
-        android:textSize="12dp" />
+        android:textSize="12sp" />
 
     
     <ImageView

@@ -1,37 +1,88 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical" >
-    
-    <ScrollView
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/scrollView1"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent" >
+
+    <RelativeLayout
         android:layout_width="match_parent"
-    	android:layout_height="match_parent">
-    
-        <LinearLayout
-    		android:layout_width="match_parent"
-    		android:layout_height="wrap_content"
-    		android:orientation="vertical" >
+        android:layout_height="wrap_content" >
+        
+	    <LinearLayout
+	        android:id="@+id/fragment_forecast_thumbnail"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:padding="3dp" >
+	
+	        <ImageView
+	            android:id="@+id/fragment_forecast_image"
+	            android:layout_width="28dp"
+	            android:layout_height="28dp"
+	            android:src="@drawable/weather01"
+	            android:contentDescription="@string/weather_sky_image" />
+	    </LinearLayout>
+
+	    <TextView
+	        android:id="@+id/fragment_forecast_skyname"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:layout_toRightOf="@+id/fragment_forecast_thumbnail"
+	        android:layout_marginTop="10dp"
+	        android:text="@string/weather_sky_condition"
+	        android:textColor="#343434"
+	        android:textSize="14sp" />
+	        
+	    <TextView
+	        android:id="@+id/fragment_forecast_minmax"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:layout_below="@+id/fragment_forecast_thumbnail"
+	        android:layout_marginLeft="5dp"
+	        android:text="@string/weather_min_max"
+	        android:textColor="#343434"
+	        android:textSize="12sp" />
 	    
-		    <TextView android:id="@+id/fragment_forecast_textview_currentweather"
-			    android:layout_width="match_parent"
-			    android:layout_height="wrap_content"
-			    android:paddingLeft="4dp"
-			    android:paddingRight="4dp" />
-		    
-			<TextView android:id="@+id/fragment_forecast_textview_forecast3day"
-			    android:layout_width="match_parent"
-			    android:layout_height="wrap_content"
-			    android:paddingLeft="4dp"
-			    android:paddingRight="4dp" />
-			
-			<TextView android:id="@+id/fragment_forecast_textview_forecast6day"
-			    android:layout_width="match_parent"
-			    android:layout_height="wrap_content"
-			    android:paddingLeft="4dp"
-			    android:paddingRight="4dp" />
-		</LinearLayout>
-	</ScrollView>	
-</LinearLayout>
+	    <TextView
+	        android:id="@+id/fragment_forecast_temperature"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:layout_below="@+id/fragment_forecast_minmax"
+	        android:layout_marginTop="2dp"
+	        android:text="@string/weather_current_temperature"
+	        android:textColor="#0000cd"
+	        android:textSize="32sp" />
+	    
+	    <RelativeLayout
+	        android:layout_width="wrap_content"
+		    android:layout_height="wrap_content"
+		    android:layout_below="@+id/fragment_forecast_temperature">
+	        
+	        <TextView
+		        android:id="@+id/fragment_forecast_textview_currentweather"
+		        android:layout_width="wrap_content"
+		        android:layout_height="wrap_content"
+		        android:text="current"
+		        android:textColor="#343434"
+	        	android:textSize="12sp"/>
+	        <TextView
+		        android:id="@+id/fragment_forecast_textview_forecast3day"
+		        android:layout_width="wrap_content"
+		        android:layout_height="wrap_content"
+		        android:layout_below="@+id/fragment_forecast_textview_currentweather"
+		        android:text="3days"
+		        android:textColor="#343434"
+	        	android:textSize="12sp"/>
+	        <TextView
+		        android:id="@+id/fragment_forecast_textview_forecast6day"
+		        android:layout_width="wrap_content"
+		        android:layout_height="wrap_content" 
+		        android:layout_below="@+id/fragment_forecast_textview_forecast3day"
+		        android:text="6days"
+		        android:textColor="#343434"
+	        	android:textSize="12sp" />
+		</RelativeLayout>
+	</RelativeLayout>
+	
+   
 
-
+</ScrollView>
