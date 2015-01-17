@@ -116,6 +116,66 @@ public class CurrentWeatherModel {
 		return "";
 	}
 	
+	public String getWdir() {
+		List<Minutely> minutelys = weather.getMinutely();
+		
+		Iterator<Minutely> iterator = minutelys.iterator();
+		while(iterator.hasNext()) {
+			Minutely minutely = iterator.next();
+			
+			return minutely.getWind().getWdir();
+		}
+		return "";
+	}
+	
+	public String getWspd() {
+		List<Minutely> minutelys = weather.getMinutely();
+		
+		Iterator<Minutely> iterator = minutelys.iterator();
+		while(iterator.hasNext()) {
+			Minutely minutely = iterator.next();
+			
+			return minutely.getWind().getWspd();
+		}
+		return "";
+	}
+	
+	public String getPrecipitation() {
+		List<Minutely> minutelys = weather.getMinutely();
+		
+		Iterator<Minutely> iterator = minutelys.iterator();
+		while(iterator.hasNext()) {
+			Minutely minutely = iterator.next();
+			
+			return minutely.getPrecipitation().getSinceOntime();
+		}
+		return "";
+	}
+	
+	public String getHumidity() {
+		List<Minutely> minutelys = weather.getMinutely();
+		
+		Iterator<Minutely> iterator = minutelys.iterator();
+		while(iterator.hasNext()) {
+			Minutely minutely = iterator.next();
+			
+			return minutely.getHumidity();
+		}
+		return "";
+	}
+	
+	public String getSurface() {
+		List<Minutely> minutelys = weather.getMinutely();
+		
+		Iterator<Minutely> iterator = minutelys.iterator();
+		while(iterator.hasNext()) {
+			Minutely minutely = iterator.next();
+			
+			return minutely.getPressure().getSurface();
+		}
+		return "";
+	}
+
 	/*
 	하늘상태코드명
 	- SKY_A01: 맑음
@@ -188,6 +248,7 @@ public class CurrentWeatherModel {
 			sb.append("\n오늘 최고기온: " + minutely.getTemperature().getTmax());
 			sb.append("\n오늘 최저기온: " + minutely.getTemperature().getTmin());
 			sb.append("\n습도: " + minutely.getHumidity());
+			sb.append("\n기압: " + minutely.getPressure().getSurface());
 			sb.append("\n관측시간: " + minutely.getTimeObservation());
 		}
 		return sb.toString();

@@ -48,8 +48,8 @@ public class GeocodeManager {
 			ResponseHandler<String> responseHandler = new BasicResponseHandler();
 			String result = client.execute(httpget, responseHandler);
 			
-	        Log.d(TAG, "\n\n=== Google Geocode - setLocationInfo");
-            Log.d(TAG, result);
+	        Log.d(TAG, "\n\n=== Google Geocode - setLocationInfo\n" + sb.toString());
+	        Log.d(TAG, result);
             
 			JSONObject jsonObject = new JSONObject(result);			
 			mLatitude = ((JSONArray)jsonObject.get("results")).getJSONObject(0)

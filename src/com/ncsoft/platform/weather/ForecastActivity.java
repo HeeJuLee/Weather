@@ -1,25 +1,14 @@
 package com.ncsoft.platform.weather;
 
-import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentActivity;
-import android.support.v4.app.FragmentManager;
 
-public class ForecastActivity extends FragmentActivity {
+public class ForecastActivity extends SingleFragmentActivity {
 
 	@Override
-	public void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_container);
+	protected Fragment createFragment() {
 		
-		FragmentManager manager = getSupportFragmentManager();
-        Fragment fragment = manager.findFragmentById(R.id.container);
-
-        if (fragment == null) {
-            fragment = new ForecastFragment();
-            manager.beginTransaction()
-                .add(R.id.container, fragment)
-                .commit();
-        } 
+		int pos = (Integer) getIntent().getSerializableExtra(ForecastFragment.EXTRA_ITEM_POSITION);
+		
+		return ForecastFragment.getInstance(pos);
 	}
 }

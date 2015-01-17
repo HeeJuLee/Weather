@@ -8,6 +8,9 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.app.ListFragment;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -41,6 +44,7 @@ public class WeatherListFragment extends ListFragment {
 		
 		getActivity().setTitle(R.string.weather_list);
 		setHasOptionsMenu(true);
+		setRetainInstance(true);
 		
 		WorkerThread thread = new WorkerThread(new WeatherHandler(), WEATHERLIST_INIT);
 		thread.start();
@@ -55,13 +59,25 @@ public class WeatherListFragment extends ListFragment {
 	
 	@Override
 	public void onListItemClick(ListView l, View v, int position, long id) {
-		//CurrentWeatherModel current = (CurrentWeatherModel) getListView().getItemAtPosition(position);
 		
-		// 인텐트 생성해서 디테일 액티비티로 엑스트라 전송
-		Intent intent = new Intent(getActivity(), ForecastActivity.class);
-		intent.putExtra(ForecastFragment.EXTRA_POSITION, position);
-		startActivity(intent);
+		if(getActivity().findViewById(R.id.detail_container) == null) {
+			// two-pane 구조 아님. 인텐트 생성해서 디테일 액티비티로 엑스트라 전송
+			Intent intent = new Intent(getActivity(), ForecastActivity.class);
+			intent.putExtra(ForecastFragment.EXTRA_ITEM_POSITION, position);
+			startActivity(intent);
+		} else {
+			// two-pane 구조. 프래그먼트를 만들어서 container에 넣어줌
+			FragmentManager fm = getFragmentManager();
+			FragmentTransaction ft = fm.beginTransaction();
+			
+			Fragment fragment = fm.findFragmentById(R.id.detail_container);
+			if(fragment != null)
+				ft.remove(fragment);
+				
+			ft.add(R.id.detail_container, ForecastFragment.getInstance(position)).commit();
+		}
 	}
+	
 	
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
@@ -90,6 +106,7 @@ public class WeatherListFragment extends ListFragment {
 			}
 		}
 	}
+	
 	
 	private class WeatherListAdapter extends ArrayAdapter<CurrentWeatherModel> {
 		
@@ -128,7 +145,7 @@ public class WeatherListFragment extends ListFragment {
 			return convertView;
 		}
 	}
-		
+
 	@SuppressLint("HandlerLeak")
 	private class WeatherHandler extends Handler {
 		@Override
@@ -144,6 +161,7 @@ public class WeatherListFragment extends ListFragment {
 				case WEATHERLIST_ADD:
 					mWeatherListAdapter.notifyDataSetChanged();
 					break;
+				case WEATHERLIST_FAIL:
 				default:
 					Toast.makeText(getActivity(), "FAIL: Weather is not loaded", Toast.LENGTH_SHORT).show();
 			}

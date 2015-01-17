@@ -16,16 +16,16 @@
 		     android:padding="8dp">
 		     
 		     <TableRow
-		         android:id="@+id/tableRow1"
 		         android:layout_width="match_parent"
 		         android:layout_height="wrap_content" >
+		         
+		         <!-- 하늘상태 이미지, 텍스트 -->
 		         <ImageView
 		            android:id="@+id/fragment_forecast_image"
 		            android:layout_width="28dp"
 		            android:layout_height="28dp"
 		            android:src="@drawable/weather01"
 		            android:contentDescription="@string/weather_sky_image" />
-	
 		         <TextView
 		             android:id="@+id/fragment_forecast_skyname"
 		             android:layout_width="wrap_content"
@@ -40,9 +40,9 @@
 		     </TableRow>
 		
 		    <TableRow
-		         android:id="@+id/tableRow2"
 		         android:layout_width="match_parent"
 		         android:layout_height="wrap_content" >
+		         <!-- 최저 최고 기온 -->
 		         <TextView
 			        android:id="@+id/fragment_forecast_minmax"
 			        android:layout_width="wrap_content"
@@ -58,9 +58,9 @@
 		     </TableRow>
 		
 		     <TableRow
-		         android:id="@+id/tableRow3"
 		         android:layout_width="match_parent"
 		         android:layout_height="wrap_content" >
+		         <!-- 현재 기온 -->
 		          <TextView
 			        android:id="@+id/fragment_forecast_temperature"
 			        android:layout_width="wrap_content"
@@ -76,61 +76,97 @@
 		     </TableRow>
 		</TableLayout>
 		<TableLayout
-			android:layout_width="match_parent"
+			 android:layout_width="match_parent"
 		     android:layout_height="wrap_content"
 		     android:stretchColumns="*" 
 		     android:shrinkColumns="*"
 		     android:padding="8dp">
 		     
+		     <!-- 세부사항 -->
+		     <TableRow android:layout_width="match_parent" android:layout_height="wrap_content" android:gravity="center">
+		         <TextView android:text="강수량(적설량)" android:textColor="#ffffff" android:textSize="11sp" android:layout_weight="1" android:gravity="center" />
+		         <TextView android:text="습도" android:textColor="#ffffff" android:textSize="11sp" android:layout_weight="1" android:gravity="center" />
+		         <TextView android:text="기압" android:textColor="#ffffff" android:textSize="11sp" android:layout_weight="1" android:gravity="center" />
+		         <TextView android:text="풍향" android:textColor="#ffffff" android:textSize="11sp" android:layout_weight="1" android:gravity="center" />
+		         <TextView android:text="풍속" android:textColor="#ffffff" android:textSize="11sp" android:layout_weight="1" android:gravity="center" />
+		     </TableRow>
+		     <View android:layout_width="fill_parent" android:layout_height="0.6dp" android:background="#808080" />
+		     <TableRow android:layout_width="match_parent" android:layout_height="wrap_content" android:gravity="center" >
+		         <TextView android:id="@+id/fragment_forecast_precipitation" 
+		             android:textColor="#ffffff" android:textSize="11sp" android:layout_weight="1" android:gravity="center" />	
+		         <TextView android:id="@+id/fragment_forecast_humidity" 
+		             android:textColor="#ffffff" android:textSize="11sp" android:layout_weight="1" android:gravity="center" />
+		         <TextView android:id="@+id/fragment_forecast_surface" 
+		             android:textColor="#ffffff" android:textSize="11sp" android:layout_weight="1" android:gravity="center" />
+		         <TextView android:id="@+id/fragment_forecast_wdir" 
+		             android:textColor="#ffffff" android:textSize="11sp" android:layout_weight="1" android:gravity="center" />
+		         <TextView android:id="@+id/fragment_forecast_wspd" 
+		             android:textColor="#ffffff" android:textSize="11sp" android:layout_weight="1" android:gravity="center" />
+			 </TableRow>
+			 <View android:layout_width="fill_parent" android:layout_height="0.6dp" android:background="#808080" />
+		</TableLayout>
+		
+		<TableLayout
+			 android:layout_width="match_parent"
+		     android:layout_height="wrap_content"
+		     android:stretchColumns="*" 
+		     android:shrinkColumns="*"
+		     android:padding="8dp">
+		     
+		     <!-- 5일 예보 -->
 		     <TableRow android:layout_width="match_parent" android:layout_height="wrap_content"	android:gravity="center" >
-		         <TextView android:text="" android:textColor="#ffffff" android:textSize="11sp" android:layout_weight="1" android:gravity="center" />
+		         <TextView android:text="" android:textColor="#ffffff" android:textSize="11sp" android:layout_weight="1" />
+			 </TableRow>		    
+		      
+		     <TableRow android:layout_width="match_parent" android:layout_height="wrap_content"	android:gravity="center" >
+		         <TextView android:text="예보" android:textColor="#ffffff" android:textSize="11sp" android:layout_weight="1" android:gravity="center" />
 		         <TextView android:text="오전" android:textColor="#ffffff" android:textSize="11sp" android:layout_weight="1" android:gravity="center" />
 		         <TextView android:text="오후" android:textColor="#ffffff" android:textSize="11sp" android:layout_weight="1" android:gravity="center" />
 		         <TextView android:text="최저" android:textColor="#ffffff" android:textSize="11sp" android:layout_weight="1" android:gravity="center" />
 		         <TextView android:text="최고" android:textColor="#ffffff" android:textSize="11sp" android:layout_weight="1" android:gravity="center" />
 		     </TableRow>
-		     <View android:layout_width="fill_parent" android:layout_height="1dp" android:background="#808080" />
+		     <View android:layout_width="fill_parent" android:layout_height="0.8dp" android:background="#808080" />
+		     
 		     <TableRow 
 		         android:layout_width="match_parent" 
 		         android:layout_height="wrap_content" 
 		         android:gravity="center" >
-		         
+		     
+		         <!-- 날짜 -->
 		         <TextView 
 		             android:id="@+id/fragment_forecast_2_date" 
-		             android:text="2014.01.17 토요일" 
 		             android:textColor="#ffffff" 
 		             android:textSize="11sp" 
 		             android:layout_weight="1" android:gravity="center" />
+		         
+		         <!-- 오전 오후 하늘상태 이미지 -->
 		         <ImageView 
 		             android:id="@+id/fragment_forecast_2_am" 
-		             android:src="@drawable/weather01" 
-		             android:contentDescription="@string/weather_sky_image"
 		             android:layout_width="20dp" 
 		             android:layout_height="20dp" 
 		             android:layout_weight="1" 
 		             android:gravity="center" />
 		         <ImageView 
 		             android:id="@+id/fragment_forecast_2_pm" 
-		             android:src="@drawable/weather01" 
-		             android:contentDescription="@string/weather_sky_image"
 		             android:layout_width="20dp" 
 		             android:layout_height="20dp" 
 		             android:layout_weight="1" 
 		             android:gravity="center" />
-		         <TextView 
-		             android:id="@+id/fragment_forecast_2_min" 
-		             android:text="-2" 
-		             android:textColor="#ffffff" 
-		             android:textSize="11sp" 
-		             android:layout_weight="1" 
-		             android:gravity="center" />
-		         <TextView 
-		             android:id="@+id/fragment_forecast_2_max" 
-		             android:text="3" 
-		             android:textColor="#ffffff" 
-		             android:textSize="11sp" 
-		             android:layout_weight="1" 
-		             android:gravity="center" />
+
+		         <!-- 최저 최고 기온 -->
+		         <TextView
+		             android:id="@+id/fragment_forecast_2_min"
+		             android:layout_weight="1"
+		             android:gravity="center"
+		             android:textColor="#ffffff"
+		             android:textSize="11sp" />
+		         <TextView
+		             android:id="@+id/fragment_forecast_2_max"
+		             android:layout_weight="1"
+		             android:gravity="center"
+		             android:textColor="#ffffff"
+		             android:textSize="11sp" />
+
 		     </TableRow>
 		     <TableRow 
 		         android:layout_width="match_parent" 
@@ -139,40 +175,36 @@
 		         
 		         <TextView 
 		             android:id="@+id/fragment_forecast_3_date" 
-		             android:text="2014.01.17 토요일" 
 		             android:textColor="#ffffff" 
 		             android:textSize="11sp" 
 		             android:layout_weight="1" android:gravity="center" />
 		         <ImageView 
 		             android:id="@+id/fragment_forecast_3_am" 
-		             android:src="@drawable/weather01" 
-		             android:contentDescription="@string/weather_sky_image"
 		             android:layout_width="20dp" 
 		             android:layout_height="20dp" 
 		             android:layout_weight="1" 
 		             android:gravity="center" />
 		         <ImageView 
 		             android:id="@+id/fragment_forecast_3_pm" 
-		             android:src="@drawable/weather01" 
-		             android:contentDescription="@string/weather_sky_image"
 		             android:layout_width="20dp" 
 		             android:layout_height="20dp" 
 		             android:layout_weight="1" 
 		             android:gravity="center" />
-		         <TextView 
-		             android:id="@+id/fragment_forecast_3_min" 
-		             android:text="-2" 
-		             android:textColor="#ffffff" 
-		             android:textSize="11sp" 
-		             android:layout_weight="1" 
-		             android:gravity="center" />
-		         <TextView 
-		             android:id="@+id/fragment_forecast_3_max" 
-		             android:text="3" 
-		             android:textColor="#ffffff" 
-		             android:textSize="11sp" 
-		             android:layout_weight="1" 
-		             android:gravity="center" />
+
+		         <TextView
+		             android:id="@+id/fragment_forecast_3_min"
+		             android:layout_weight="1"
+		             android:gravity="center"
+		             android:textColor="#ffffff"
+		             android:textSize="11sp" />
+
+		         <TextView
+		             android:id="@+id/fragment_forecast_3_max"
+		             android:layout_weight="1"
+		             android:gravity="center"
+		             android:textColor="#ffffff"
+		             android:textSize="11sp" />
+
 		     </TableRow>
 		     <TableRow 
 		         android:layout_width="match_parent" 
@@ -181,40 +213,36 @@
 		         
 		         <TextView 
 		             android:id="@+id/fragment_forecast_4_date" 
-		             android:text="2014.01.17 토요일" 
 		             android:textColor="#ffffff" 
 		             android:textSize="11sp" 
 		             android:layout_weight="1" android:gravity="center" />
 		         <ImageView 
 		             android:id="@+id/fragment_forecast_4_am" 
-		             android:src="@drawable/weather01" 
-		             android:contentDescription="@string/weather_sky_image"
 		             android:layout_width="20dp" 
 		             android:layout_height="20dp" 
 		             android:layout_weight="1" 
 		             android:gravity="center" />
 		         <ImageView 
 		             android:id="@+id/fragment_forecast_4_pm" 
-		             android:src="@drawable/weather01" 
-		             android:contentDescription="@string/weather_sky_image"
 		             android:layout_width="20dp" 
 		             android:layout_height="20dp" 
 		             android:layout_weight="1" 
 		             android:gravity="center" />
-		         <TextView 
-		             android:id="@+id/fragment_forecast_4_min" 
-		             android:text="-2" 
-		             android:textColor="#ffffff" 
-		             android:textSize="11sp" 
-		             android:layout_weight="1" 
-		             android:gravity="center" />
-		         <TextView 
-		             android:id="@+id/fragment_forecast_4_max" 
-		             android:text="3" 
-		             android:textColor="#ffffff" 
-		             android:textSize="11sp" 
-		             android:layout_weight="1" 
-		             android:gravity="center" />
+
+		         <TextView
+		             android:id="@+id/fragment_forecast_4_min"
+		             android:layout_weight="1"
+		             android:gravity="center"
+		             android:textColor="#ffffff"
+		             android:textSize="11sp" />
+
+		         <TextView
+		             android:id="@+id/fragment_forecast_4_max"
+		             android:layout_weight="1"
+		             android:gravity="center"
+		             android:textColor="#ffffff"
+		             android:textSize="11sp" />
+
 		     </TableRow>
 		     <TableRow 
 		         android:layout_width="match_parent" 
@@ -223,40 +251,36 @@
 		         
 		         <TextView 
 		             android:id="@+id/fragment_forecast_5_date" 
-		             android:text="2014.01.17 토요일" 
 		             android:textColor="#ffffff" 
 		             android:textSize="11sp" 
 		             android:layout_weight="1" android:gravity="center" />
 		         <ImageView 
 		             android:id="@+id/fragment_forecast_5_am" 
-		             android:src="@drawable/weather01" 
-		             android:contentDescription="@string/weather_sky_image"
-		             android:layout_width="20dp" 
+		            android:layout_width="20dp" 
 		             android:layout_height="20dp" 
 		             android:layout_weight="1" 
 		             android:gravity="center" />
 		         <ImageView 
 		             android:id="@+id/fragment_forecast_5_pm" 
-		             android:src="@drawable/weather01" 
-		             android:contentDescription="@string/weather_sky_image"
 		             android:layout_width="20dp" 
 		             android:layout_height="20dp" 
 		             android:layout_weight="1" 
 		             android:gravity="center" />
-		         <TextView 
-		             android:id="@+id/fragment_forecast_5_min" 
-		             android:text="-2" 
-		             android:textColor="#ffffff" 
-		             android:textSize="11sp" 
-		             android:layout_weight="1" 
-		             android:gravity="center" />
-		         <TextView 
-		             android:id="@+id/fragment_forecast_5_max" 
-		             android:text="3" 
-		             android:textColor="#ffffff" 
-		             android:textSize="11sp" 
-		             android:layout_weight="1" 
-		             android:gravity="center" />
+
+		         <TextView
+		             android:id="@+id/fragment_forecast_5_min"
+		             android:layout_weight="1"
+		             android:gravity="center"
+		             android:textColor="#ffffff"
+		             android:textSize="11sp" />
+
+		         <TextView
+		             android:id="@+id/fragment_forecast_5_max"
+		             android:layout_weight="1"
+		             android:gravity="center"
+		             android:textColor="#ffffff"
+		             android:textSize="11sp" />
+
 		     </TableRow>
 		     <TableRow 
 		         android:layout_width="match_parent" 
@@ -265,86 +289,96 @@
 		         
 		         <TextView 
 		             android:id="@+id/fragment_forecast_6_date" 
-		             android:text="2014.01.17 토요일" 
 		             android:textColor="#ffffff" 
 		             android:textSize="11sp" 
 		             android:layout_weight="1" android:gravity="center" />
 		         <ImageView 
 		             android:id="@+id/fragment_forecast_6_am" 
-		             android:src="@drawable/weather01" 
-		             android:contentDescription="@string/weather_sky_image"
-		             android:layout_width="20dp" 
+		              android:layout_width="20dp" 
 		             android:layout_height="20dp" 
 		             android:layout_weight="1" 
 		             android:gravity="center" />
 		         <ImageView 
 		             android:id="@+id/fragment_forecast_6_pm" 
-		             android:src="@drawable/weather01" 
-		             android:contentDescription="@string/weather_sky_image"
 		             android:layout_width="20dp" 
 		             android:layout_height="20dp" 
 		             android:layout_weight="1" 
 		             android:gravity="center" />
-		         <TextView 
-		             android:id="@+id/fragment_forecast_6_min" 
-		             android:text="-2" 
-		             android:textColor="#ffffff" 
-		             android:textSize="11sp" 
-		             android:layout_weight="1" 
-		             android:gravity="center" />
-		         <TextView 
-		             android:id="@+id/fragment_forecast_6_max" 
-		             android:text="3" 
-		             android:textColor="#ffffff" 
-		             android:textSize="11sp" 
-		             android:layout_weight="1" 
-		             android:gravity="center" />
-		     </TableRow>
-		    
-		     <TableRow
-		         android:id="@+id/tableRow4"
-		         android:layout_width="match_parent"
-		         android:layout_height="wrap_content" >
+
 		         <TextView
+		             android:id="@+id/fragment_forecast_6_min"
+		             android:layout_weight="1"
+		             android:gravity="center"
+		             android:textColor="#ffffff"
+		             android:textSize="11sp" />
+
+		         <TextView
+		             android:id="@+id/fragment_forecast_6_max"
+		             android:layout_weight="1"
+		             android:gravity="center"
+		             android:textColor="#ffffff"
+		             android:textSize="11sp" />
+
+		     </TableRow>
+		     <View android:layout_width="fill_parent" android:layout_height="0.8dp" android:background="#808080" />
+		</TableLayout>
+		
+		<!-- Row Data -->
+	 	<TableLayout
+			 android:layout_width="match_parent"
+		     android:layout_height="wrap_content"
+		     android:stretchColumns="*" 
+		     android:shrinkColumns="*"
+		     android:layout_marginTop="20dp"
+		     android:padding="8dp">
+		     
+		     <TableRow android:layout_width="match_parent" android:layout_height="wrap_content" android:gravity="center">
+		         <TextView android:text="Row Data - 현재날씨(분별)" android:textColor="#ffffff" android:textSize="10sp" android:layout_weight="1" android:gravity="left" />
+		     </TableRow>
+		     <TableRow android:layout_width="match_parent" android:layout_height="wrap_content" android:gravity="center" >
+		          <TextView
 			        android:id="@+id/fragment_forecast_textview_currentweather"
-			        android:layout_width="wrap_content"
-			        android:layout_height="wrap_content"
-			        android:layout_span="2"
+			        android:layout_width="wrap_content" android:layout_height="wrap_content"
 			        android:layout_weight="1"
-			        android:text="current"
-			        android:textColor="#ffffff"
-		        	android:textSize="12sp"/>
+			        android:text="" android:textColor="#ffffff" android:textSize="10sp"/>
+			 </TableRow>
+		</TableLayout>
+		<TableLayout
+			 android:layout_width="match_parent"
+		     android:layout_height="wrap_content"
+		     android:stretchColumns="*" 
+		     android:shrinkColumns="*"
+		     android:padding="8dp">
+		     
+		     <TableRow android:layout_width="match_parent" android:layout_height="wrap_content" android:gravity="center">
+		         <TextView android:text="Row Data - 단기예보" android:textColor="#ffffff" android:textSize="10sp" android:layout_weight="1" android:gravity="left" />
 		     </TableRow>
-		     <TableRow
-		         android:id="@+id/tableRow5"
-		         android:layout_width="match_parent"
-		         android:layout_height="wrap_content" >
-		         <TextView
+		     <TableRow android:layout_width="match_parent" android:layout_height="wrap_content" android:gravity="center" >
+		          <TextView
 			        android:id="@+id/fragment_forecast_textview_forecast3day"
-			        android:layout_width="wrap_content"
-			        android:layout_height="wrap_content"
-			        android:layout_span="2"
+			        android:layout_width="wrap_content" android:layout_height="wrap_content"
 			        android:layout_weight="1"
-			        android:text="forecast3day"
-			        android:textColor="#ffffff"
-		        	android:textSize="12sp"/>
+			        android:text="" android:textColor="#ffffff" android:textSize="10sp"/>
+			 </TableRow>
+		</TableLayout>
+		<TableLayout
+			 android:layout_width="match_parent"
+		     android:layout_height="wrap_content"
+		     android:stretchColumns="*" 
+		     android:shrinkColumns="*"
+		     android:padding="8dp">
+		     
+		     <TableRow android:layout_width="match_parent" android:layout_height="wrap_content" android:gravity="center">
+		         <TextView android:text="Row Data - 중기예보" android:textColor="#ffffff" android:textSize="10sp" android:layout_weight="1" android:gravity="left" />
 		     </TableRow>
-		     <TableRow
-		         android:id="@+id/tableRow6"
-		         android:layout_width="match_parent"
-		         android:layout_height="wrap_content" >
-		         <TextView
+		     <TableRow android:layout_width="match_parent" android:layout_height="wrap_content" android:gravity="center" >
+		          <TextView
 			        android:id="@+id/fragment_forecast_textview_forecast6day"
-			        android:layout_width="wrap_content"
-			        android:layout_height="wrap_content"
-			        android:layout_span="2"
+			        android:layout_width="wrap_content" android:layout_height="wrap_content"
 			        android:layout_weight="1"
-			        android:text="forecast6day"
-			        android:textColor="#ffffff"
-		        	android:textSize="12sp"/>
-		     </TableRow>
-		 </TableLayout>
-	 
+			        android:text="" android:textColor="#ffffff" android:textSize="10sp"/>
+			 </TableRow>
+		</TableLayout>
 	</LinearLayout>
 	
    

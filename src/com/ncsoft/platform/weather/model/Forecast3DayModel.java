@@ -45,18 +45,7 @@ public class Forecast3DayModel {
 			sb.append("\n 내일 최저: " + forecast3day.getFcstdaily().getTemperature().getTmin2day());
 			sb.append("\n 내일 최고: " + forecast3day.getFcstdaily().getTemperature().getTmax2day());
 			sb.append("\n 모레 최저: " + forecast3day.getFcstdaily().getTemperature().getTmin3day());
-			sb.append("\n 모레 최고: " + forecast3day.getFcstdaily().getTemperature().getTmax3day());
-			
-			SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-			Date convertedDate = new Date();
-			try {
-				convertedDate = formatter.parse(forecast3day.getTimeRelease());
-			} catch (ParseException e) {
-				e.printStackTrace();
-			}
-			Calendar calendar = Calendar.getInstance();
-			calendar.setTime(convertedDate);
-					
+			sb.append("\n 모레 최고: " + forecast3day.getFcstdaily().getTemperature().getTmax3day());		
 			sb.append("\n관측시간: " + forecast3day.getTimeRelease());
 		}
 		

@@ -26,6 +26,7 @@ public class AddressListActivity extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		
+		setTitle(R.string.add_address);
 		setContentView(R.layout.fragment_addresslist);
 
 		ListView listView = (ListView) findViewById(R.id.fragment_address_listview);
@@ -35,7 +36,6 @@ public class AddressListActivity extends Activity {
 
 		mAdapter = new AddressListAdapter(this, addressList);
 		listView.setAdapter(mAdapter);
-		
 		
 		listView.setOnItemClickListener(new OnItemClickListener() {
 			@Override

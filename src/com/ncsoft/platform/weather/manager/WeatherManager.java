@@ -9,6 +9,7 @@ import android.content.Context;
 import android.util.Log;
 
 import com.google.gson.Gson;
+import com.ncsoft.platform.weather.R;
 import com.ncsoft.platform.weather.model.CurrentWeatherModel;
 import com.ncsoft.platform.weather.model.Forecast3DayModel;
 import com.ncsoft.platform.weather.model.Forecast6DayModel;
@@ -28,14 +29,13 @@ public class WeatherManager {
 	private static WeatherManager mWeatherManager;
 	
 	private Context mContext;
-	private ArrayList<CurrentWeatherModel> mCurrentWeatherList;
-
 	private ArrayList<String> mAddress;
+	private ArrayList<CurrentWeatherModel> mCurrentWeatherList;	
 	
 	private WeatherManager(Context context) {
 		mContext = context;
 		mAddress = new ArrayList<String>();
-		mAddress.add("성남시 분당구");
+		mAddress.add(context.getResources().getString(R.string.default_address));
 	}
 	
 	public static WeatherManager getInstance(Context context) {
@@ -47,24 +47,6 @@ public class WeatherManager {
 		
         return mWeatherManager;
     }
-	
-	public ArrayList<CurrentWeatherModel> addCurrentWeather(String address) {
-		mAddress.add(address);
-		
-		if(mCurrentWeatherList == null) {
-			getCurrentWeatherList();
-		}
-		else {
-			GeocodeManager gm = new GeocodeManager();
-			gm.getLocationInfo(address);
-			
-			CurrentWeatherModel current = getCurrentWeather(gm.getLatitude(), gm.getLongitude());
-			current.setAddress(address);
-			
-			mCurrentWeatherList.add(current);
-		}
-		return mCurrentWeatherList;
-	}
 	
 	public ArrayList<CurrentWeatherModel> getCurrentWeatherList() {
 		if(mCurrentWeatherList == null)
@@ -81,13 +63,32 @@ public class WeatherManager {
 			GeocodeManager gm = new GeocodeManager();
 			
 			for(int i = 0; i < mAddress.size(); i++) {
-				gm.getLocationInfo(mAddress.get(i));
 				
+				// 지역별 날씨 데이터 읽어오기
+				gm.getLocationInfo(mAddress.get(i));				
 				CurrentWeatherModel current = getCurrentWeather(gm.getLatitude(), gm.getLongitude());
-				current.setAddress(mAddress.get(i));
 				
+				current.setAddress(mAddress.get(i));				
 				mCurrentWeatherList.add(current);
 			}
+		}
+		return mCurrentWeatherList;
+	}
+	
+	public ArrayList<CurrentWeatherModel> addCurrentWeather(String address) {
+		mAddress.add(address);
+		
+		if(mCurrentWeatherList == null) {
+			getCurrentWeatherList();
+		}
+		else {
+			GeocodeManager gm = new GeocodeManager();
+			gm.getLocationInfo(address);
+			
+			CurrentWeatherModel current = getCurrentWeather(gm.getLatitude(), gm.getLongitude());
+			current.setAddress(address);
+			
+			mCurrentWeatherList.add(current);
 		}
 		return mCurrentWeatherList;
 	}
@@ -135,10 +136,9 @@ public class WeatherManager {
 		    ResponseMessage result = api.request(req);
 		    
 		    if(result.getStatusCode().equalsIgnoreCase("200")) {
-		    	Gson gson = new Gson(); 
-				
-				Log.d(TAG, result.toString());
-
+		    	Log.d(TAG, result.toString());
+		    	
+		    	Gson gson = new Gson();
 		    	return gson.fromJson(result.toString(), typeOfT);
 		    }
 		} catch(PlanetXSDKException e) {
@@ -149,17 +149,19 @@ public class WeatherManager {
 	}
 	
 	protected CurrentWeatherModel currentWeatherModelFromJson() {
+		
 		Gson gson = new Gson(); 
 		
-		String result = FileUtils.getFileFromAssets(mContext, "current_weather_response.json");
+		String result = FileUtils.getStringFromAssets(mContext, "current_weather_response.json");
 		
 		return gson.fromJson(result, CurrentWeatherModel.class);
 	}
 	
 	protected Forecast6DayModel forecast6DayModelFromJson() {
+		
 		Gson gson = new Gson(); 
 		
-		String result = FileUtils.getFileFromAssets(mContext, "forecast_6day_response.json");
+		String result = FileUtils.getStringFromAssets(mContext, "forecast_6day_response.json");
 		
 		return gson.fromJson(result, Forecast6DayModel.class);
 	}

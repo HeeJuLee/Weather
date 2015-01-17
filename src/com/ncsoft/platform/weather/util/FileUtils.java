@@ -12,7 +12,7 @@ import android.content.Context;
 
 public  class FileUtils {
 
-	public static String getFileFromAssets(Context context, String fileName) {
+	public static String getStringFromAssets(Context context, String fileName) {
 		StringBuilder s = new StringBuilder("");
         try {
             InputStreamReader in = new InputStreamReader(context.getResources().getAssets().open(fileName));
@@ -54,6 +54,5 @@ public  class FileUtils {
 			if(writer != null)
 				writer.close();
 		}
-		
 	}
 }
