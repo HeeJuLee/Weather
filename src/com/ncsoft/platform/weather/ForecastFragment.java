@@ -2,7 +2,6 @@ package com.ncsoft.platform.weather;
 
 import java.util.ArrayList;
 
-import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -50,14 +49,19 @@ public class ForecastFragment extends Fragment {
 		ArrayList<CurrentWeatherModel> weatherList = weatherManager.getCurrentWeatherList();
 		CurrentWeatherModel current = weatherList.get(mPos);
 		
+		// 하늘상태 이미지
 		image.setImageResource(current.getSkyResourceID());
 		
+		// 현재 기온
 		String formatString = getResources().getString(R.string.current_temperature_format);
 		temperature.setText(String.format(formatString, current.getTc()));
+		// 하늘상태 텍스트
 		skyname.setText(current.getSkyName());
+		// 최저 최고 기온
 		formatString = getResources().getString(R.string.minmax_temperature_format);
 		minmax.setText(String.format(formatString, current.getTmin(), current.getTmax()));
 		
+		// 로우 데이터
 		TextView currentweather = (TextView) v.findViewById(R.id.fragment_forecast_textview_currentweather);
 		currentweather.setText(current.toString());
 
@@ -72,10 +76,64 @@ public class ForecastFragment extends Fragment {
 				if(mForecast3Day != null && mForecast6Day != null) {
 					View v = getView();
 					
+					// 로우 데이터
 					TextView forecast3day = (TextView) v.findViewById(R.id.fragment_forecast_textview_forecast3day);
 					TextView forecast6day = (TextView) v.findViewById(R.id.fragment_forecast_textview_forecast6day);
 					forecast3day.setText(mForecast3Day.toString());
 					forecast6day.setText(mForecast6Day.toString());
+					
+					// 5일간 오전 오후 
+					ImageView amImage = (ImageView) v.findViewById(R.id.fragment_forecast_2_am);
+					ImageView pmImage = (ImageView) v.findViewById(R.id.fragment_forecast_2_pm);
+					amImage.setImageResource(mForecast6Day.getSkyResourceID(2, true));
+					pmImage.setImageResource(mForecast6Day.getSkyResourceID(2, false));
+					
+					amImage = (ImageView) v.findViewById(R.id.fragment_forecast_3_am);
+					pmImage = (ImageView) v.findViewById(R.id.fragment_forecast_3_pm);
+					amImage.setImageResource(mForecast6Day.getSkyResourceID(3, true));
+					pmImage.setImageResource(mForecast6Day.getSkyResourceID(3, false));
+					
+					amImage = (ImageView) v.findViewById(R.id.fragment_forecast_4_am);
+					pmImage = (ImageView) v.findViewById(R.id.fragment_forecast_4_pm);
+					amImage.setImageResource(mForecast6Day.getSkyResourceID(4, true));
+					pmImage.setImageResource(mForecast6Day.getSkyResourceID(4, false));
+					
+					amImage = (ImageView) v.findViewById(R.id.fragment_forecast_5_am);
+					pmImage = (ImageView) v.findViewById(R.id.fragment_forecast_5_pm);
+					amImage.setImageResource(mForecast6Day.getSkyResourceID(5, true));
+					pmImage.setImageResource(mForecast6Day.getSkyResourceID(5, false));
+				
+					amImage = (ImageView) v.findViewById(R.id.fragment_forecast_6_am);
+					pmImage = (ImageView) v.findViewById(R.id.fragment_forecast_6_pm);
+					amImage.setImageResource(mForecast6Day.getSkyResourceID(6, true));
+					pmImage.setImageResource(mForecast6Day.getSkyResourceID(6, false));
+					
+					// 5일간 최저 최고 기온
+					String formatString = getResources().getString(R.string.forecast_minmax_format);
+					TextView min = (TextView) v.findViewById(R.id.fragment_forecast_2_min);
+					TextView max = (TextView) v.findViewById(R.id.fragment_forecast_2_max);
+					min.setText(String.format(formatString, mForecast6Day.getTmin(2)));
+					max.setText(String.format(formatString, mForecast6Day.getTmax(2)));
+					
+					min = (TextView) v.findViewById(R.id.fragment_forecast_3_min);
+					max = (TextView) v.findViewById(R.id.fragment_forecast_3_max);
+					min.setText(String.format(formatString, mForecast6Day.getTmin(3)));
+					max.setText(String.format(formatString, mForecast6Day.getTmax(3)));
+					
+					min = (TextView) v.findViewById(R.id.fragment_forecast_4_min);
+					max = (TextView) v.findViewById(R.id.fragment_forecast_4_max);
+					min.setText(String.format(formatString, mForecast6Day.getTmin(4)));
+					max.setText(String.format(formatString, mForecast6Day.getTmax(4)));
+					
+					min = (TextView) v.findViewById(R.id.fragment_forecast_5_min);
+					max = (TextView) v.findViewById(R.id.fragment_forecast_5_max);
+					min.setText(String.format(formatString, mForecast6Day.getTmin(5)));
+					max.setText(String.format(formatString, mForecast6Day.getTmax(5)));
+					
+					min = (TextView) v.findViewById(R.id.fragment_forecast_6_min);
+					max = (TextView) v.findViewById(R.id.fragment_forecast_6_max);
+					min.setText(String.format(formatString, mForecast6Day.getTmin(6)));
+					max.setText(String.format(formatString, mForecast6Day.getTmax(6)));
 				}
 				else
 					Toast.makeText(getActivity(), R.string.forecast_is_null, Toast.LENGTH_SHORT).show();

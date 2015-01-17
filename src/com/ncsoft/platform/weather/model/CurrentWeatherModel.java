@@ -157,11 +157,11 @@ public class CurrentWeatherModel {
 					case 12: return R.drawable.weather26;
 					case 13: return R.drawable.weather27;
 					case 14: return R.drawable.weather28;
-					default: return R.drawable.weather01;			
+					default: return R.drawable.weather38;			
 				}		
 			}
 		}
-		return R.drawable.weather01;
+		return R.drawable.weather38;
 	}
 	
 	public String toString() {

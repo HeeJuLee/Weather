@@ -3,6 +3,8 @@ package com.ncsoft.platform.weather.model;
 import java.util.Iterator;
 import java.util.List;
 
+import com.ncsoft.platform.weather.R;
+
 /* 
  * 중기예보 (12시간 간격, 3일~10일예보)
  */
@@ -68,6 +70,101 @@ public class Forecast6DayModel {
 		}
 		
 		return sb.toString();
+	}
+	
+	public int getTmax(int day) {
+		List<Forecast6days> forecast6days = weather.getForecast6days();
+		
+		Iterator<Forecast6days> iterator = forecast6days.iterator();
+		while(iterator.hasNext()) {
+			Forecast6days forecast6day = iterator.next();
+			
+			switch(day) {
+				case 2: return Math.round(Float.parseFloat(forecast6day.getTemperature().getTmax2day()));
+				case 3: return Math.round(Float.parseFloat(forecast6day.getTemperature().getTmax3day()));
+				case 4: return Math.round(Float.parseFloat(forecast6day.getTemperature().getTmax4day()));
+				case 5: return Math.round(Float.parseFloat(forecast6day.getTemperature().getTmax5day()));
+				case 6: return Math.round(Float.parseFloat(forecast6day.getTemperature().getTmax6day()));
+				default: break;
+			}
+		}
+		return -999;
+	}
+	public int getTmin(int day) {
+		List<Forecast6days> forecast6days = weather.getForecast6days();
+		
+		Iterator<Forecast6days> iterator = forecast6days.iterator();
+		while(iterator.hasNext()) {
+			Forecast6days forecast6day = iterator.next();
+			
+			switch(day) {
+				case 2: return Math.round(Float.parseFloat(forecast6day.getTemperature().getTmin2day()));
+				case 3: return Math.round(Float.parseFloat(forecast6day.getTemperature().getTmin3day()));
+				case 4: return Math.round(Float.parseFloat(forecast6day.getTemperature().getTmin4day()));
+				case 5: return Math.round(Float.parseFloat(forecast6day.getTemperature().getTmin5day()));
+				case 6: return Math.round(Float.parseFloat(forecast6day.getTemperature().getTmin6day()));
+				default: break;
+			}
+		}
+		return -999;
+	}
+	/*
+	하늘상태코드명
+	- SKY_W00: 상태없음
+	- SKY_W01: 맑음
+	- SKY_W02: 구름조금
+	- SKY_W03: 구름많음
+	- SKY_W04: 흐림
+	- SKY_W07: 흐리고 비
+	- SKY_W09: 구름많고 비
+	- SKY_W10: 소나기
+	- SKY_W11: 비 또는 눈
+	- SKY_W12: 구름많고 눈
+	- SKY_W13: 흐리고 눈
+	*/
+	public int getSkyResourceID(int day, boolean am) {
+		List<Forecast6days> forecast6days = weather.getForecast6days();
+		
+		Iterator<Forecast6days> iterator = forecast6days.iterator();
+		while(iterator.hasNext()) {
+			Forecast6days forecast6day = iterator.next();
+			
+			String code = "SKY_W00";
+			if(am) {
+				switch(day) {
+					case 2: code = forecast6day.getSky().getAmCode2day(); break;
+					case 3: code = forecast6day.getSky().getAmCode3day(); break;
+					case 4: code = forecast6day.getSky().getAmCode4day(); break;
+					case 5: code = forecast6day.getSky().getAmCode5day(); break;
+					case 6: code = forecast6day.getSky().getAmCode6day(); break;
+					default: break;
+				}
+			} else {
+				switch(day) {
+					case 2: code = forecast6day.getSky().getPmCode2day(); break;
+					case 3: code = forecast6day.getSky().getPmCode3day(); break;
+					case 4: code = forecast6day.getSky().getPmCode4day(); break;
+					case 5: code = forecast6day.getSky().getPmCode5day(); break;
+					case 6: code = forecast6day.getSky().getPmCode6day(); break;
+					default: break;
+				}
+			}
+			
+			switch(Integer.parseInt(code.substring(5))) {
+				case 1: return R.drawable.weather01;
+				case 2: return R.drawable.weather02;
+				case 3: return R.drawable.weather03;
+				case 4: return R.drawable.weather18;
+				case 7: return R.drawable.weather21;
+				case 9: return R.drawable.weather12;
+				case 10: return R.drawable.weather21;
+				case 11: return R.drawable.weather04;
+				case 12: return R.drawable.weather13;
+				case 13: return R.drawable.weather32;
+				default: return R.drawable.weather38;	
+			}
+		}
+		return R.drawable.weather38;
 	}
 	
 	// 요청결과
