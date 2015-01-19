@@ -106,6 +106,7 @@ public class ForecastFragment extends Fragment {
 	
 	private View currentWeatherDataSetChange(View v) {
 		
+		TextView address = (TextView) v.findViewById(R.id.fragment_forecast_address);
 		ImageView image = (ImageView) v.findViewById(R.id.fragment_forecast_image);
 		TextView temperature = (TextView) v.findViewById(R.id.fragment_forecast_temperature);
 		TextView skyname = (TextView) v.findViewById(R.id.fragment_forecast_skyname);
@@ -120,8 +121,9 @@ public class ForecastFragment extends Fragment {
 		ArrayList<CurrentWeatherModel> weatherList = weatherManager.getCurrentWeatherList();
 		CurrentWeatherModel current = weatherList.get(mPos);
 		
-		// 화면 제목은 지역명으로 바꿈
+		// 지역명
 		getActivity().setTitle(current.getAddress());
+		address.setText(current.getAddress());
 		
 		// 하늘상태 이미지
 		image.setImageResource(current.getSkyResourceID());
