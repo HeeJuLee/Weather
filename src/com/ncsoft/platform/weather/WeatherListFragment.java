@@ -61,12 +61,12 @@ public class WeatherListFragment extends ListFragment {
 	public void onListItemClick(ListView l, View v, int position, long id) {
 		
 		if(getActivity().findViewById(R.id.detail_container) == null) {
-			// two-pane ±¸Á¶ ¾Æ´Ô. ÀÎÅÙÆ® »ı¼ºÇØ¼­ µğÅ×ÀÏ ¾×Æ¼ºñÆ¼·Î ¿¢½ºÆ®¶ó Àü¼Û
+			// two-pane êµ¬ì¡° ì•„ë‹˜. ì¸í…íŠ¸ ìƒì„±í•´ì„œ ë””í…Œì¼ ì•¡í‹°ë¹„í‹°ë¡œ ì—‘ìŠ¤íŠ¸ë¼ ì „ì†¡
 			Intent intent = new Intent(getActivity(), ForecastActivity.class);
 			intent.putExtra(ForecastFragment.EXTRA_ITEM_POSITION, position);
 			startActivity(intent);
 		} else {
-			// two-pane ±¸Á¶. ÇÁ·¡±×¸ÕÆ®¸¦ ¸¸µé¾î¼­ container¿¡ ³Ö¾îÁÜ
+			// two-pane êµ¬ì¡°. í”„ë˜ê·¸ë¨¼íŠ¸ë¥¼ ë§Œë“¤ì–´ì„œ containerì— ë„£ì–´ì¤Œ
 			FragmentManager fm = getFragmentManager();
 			FragmentTransaction ft = fm.beginTransaction();
 			

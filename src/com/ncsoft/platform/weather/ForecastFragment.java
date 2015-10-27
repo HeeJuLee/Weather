@@ -44,10 +44,10 @@ public class ForecastFragment extends Fragment {
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		
-		// ActivityÀÇ ÀÎÅÙÆ®¸¦ Á÷Á¢ ÀĞ±â
+		// Activityì˜ ì¸í…íŠ¸ë¥¼ ì§ì ‘ ì½ê¸°
 		//mPos = getActivity().getIntent().getIntExtra(EXTRA_ITEM_POSITION, 0);
 		
-		// FragmentÀÇ ¾ÆÅ¥¸ÕÆ®·Î Àü´ŞÇÏµµ·Ï ÇØ¼­ ¹Ş±â 
+		// Fragmentì˜ ì•„íë¨¼íŠ¸ë¡œ ì „ë‹¬í•˜ë„ë¡ í•´ì„œ ë°›ê¸° 
 		mPos = (Integer) getArguments().getSerializable(EXTRA_ITEM_POSITION);
 				
 		getForecastData();
@@ -59,7 +59,7 @@ public class ForecastFragment extends Fragment {
 
 		View v = inflater.inflate(R.layout.fragment_forecast, container, false);
 		
-		// ³¯¾¾¸®½ºÆ®¿¡¼­ °¡Á®¿Â ±âº» ³¯¾¾ Á¤º¸ È­¸é¿¡ ¸ÅÄ¡ÇÏ±â
+		// ë‚ ì”¨ë¦¬ìŠ¤íŠ¸ì—ì„œ ê°€ì ¸ì˜¨ ê¸°ë³¸ ë‚ ì”¨ ì •ë³´ í™”ë©´ì— ë§¤ì¹˜í•˜ê¸°
 		return currentWeatherDataSetChange(v);
 	}
 
@@ -69,7 +69,7 @@ public class ForecastFragment extends Fragment {
 			
 			if(msg.what == 1) {
 				if(mForecast3Day != null && mForecast6Day != null) {
-					// ¿¹º¸ °¡Á®¿À±â ¼º°ø - ¿¹º¸ µ¥ÀÌÅÍ È­¸é¿¡ ¸ÅÄ¡ÇÏ±â
+					// ì˜ˆë³´ ê°€ì ¸ì˜¤ê¸° ì„±ê³µ - ì˜ˆë³´ ë°ì´í„° í™”ë©´ì— ë§¤ì¹˜í•˜ê¸°
 					forecastWeatherDataSetChange();
 				}
 				else
@@ -120,34 +120,34 @@ public class ForecastFragment extends Fragment {
 		ArrayList<CurrentWeatherModel> weatherList = weatherManager.getCurrentWeatherList();
 		CurrentWeatherModel current = weatherList.get(mPos);
 		
-		// È­¸é Á¦¸ñÀº Áö¿ª¸íÀ¸·Î ¹Ù²Ş
+		// í™”ë©´ ì œëª©ì€ ì§€ì—­ëª…ìœ¼ë¡œ ë°”ê¿ˆ
 		getActivity().setTitle(current.getAddress());
 		
-		// ÇÏ´Ã»óÅÂ ÀÌ¹ÌÁö
+		// í•˜ëŠ˜ìƒíƒœ ì´ë¯¸ì§€
 		image.setImageResource(current.getSkyResourceID());
 		
-		// ÇöÀç ±â¿Â
+		// í˜„ì¬ ê¸°ì˜¨
 		String formatString = getResources().getString(R.string.current_temperature_format);
 		temperature.setText(String.format(formatString, current.getTc()));
-		// ÇÏ´Ã»óÅÂ ÅØ½ºÆ®
+		// í•˜ëŠ˜ìƒíƒœ í…ìŠ¤íŠ¸
 		skyname.setText(current.getSkyName());
-		// ÃÖÀú ÃÖ°í ±â¿Â
+		// ìµœì € ìµœê³  ê¸°ì˜¨
 		formatString = getResources().getString(R.string.minmax_temperature_format);
 		minmax.setText(String.format(formatString, current.getTmin(), current.getTmax()));
 		
-		// °­¼ö·®
+		// ê°•ìˆ˜ëŸ‰
 		precipitation.setText(current.getPrecipitation());
-		// ½Àµµ
+		// ìŠµë„
 		humidity.setText(current.getHumidity());
-		// ±â¾Ğ
+		// ê¸°ì••
 		surface.setText(current.getSurface());
-		// Ç³Çâ
+		// í’í–¥
 		wdir.setText(current.getWdir());
-		// Ç³¼Ó
+		// í’ì†
 		wspd.setText(current.getWspd());
 		
 		
-		// ·Î¿ì µ¥ÀÌÅÍ
+		// ë¡œìš° ë°ì´í„°
 		TextView currentweather = (TextView) v.findViewById(R.id.fragment_forecast_textview_currentweather);
 		currentweather.setText(current.toString());
 		
@@ -158,8 +158,8 @@ public class ForecastFragment extends Fragment {
 		
 		View v = getView();
 		
-		// 5ÀÏ°£ ¿¹º¸
-		// ³¯Â¥
+		// 5ì¼ê°„ ì˜ˆë³´
+		// ë‚ ì§œ
 		Calendar cal = Calendar.getInstance();
 		cal.add(Calendar.DATE, 2);
 		Date nextDate = cal.getTime();
@@ -188,7 +188,7 @@ public class ForecastFragment extends Fragment {
 		nextDate = cal.getTime();
 		dateText.setText(dateFormat.format(nextDate));
 		
-		// ¿ÀÀü ¿ÀÈÄ ÇÏ´Ã»óÅÂ
+		// ì˜¤ì „ ì˜¤í›„ í•˜ëŠ˜ìƒíƒœ
 		ImageView amImage = (ImageView) v.findViewById(R.id.fragment_forecast_2_am);
 		ImageView pmImage = (ImageView) v.findViewById(R.id.fragment_forecast_2_pm);
 		amImage.setImageResource(mForecast6Day.getSkyResourceID(2, true));
@@ -214,7 +214,7 @@ public class ForecastFragment extends Fragment {
 		amImage.setImageResource(mForecast6Day.getSkyResourceID(6, true));
 		pmImage.setImageResource(mForecast6Day.getSkyResourceID(6, false));
 		
-		// ÃÖÀú ÃÖ°í ±â¿Â
+		// ìµœì € ìµœê³  ê¸°ì˜¨
 		String formatString = getResources().getString(R.string.forecast_minmax_format);
 		TextView min = (TextView) v.findViewById(R.id.fragment_forecast_2_min);
 		TextView max = (TextView) v.findViewById(R.id.fragment_forecast_2_max);
@@ -241,7 +241,7 @@ public class ForecastFragment extends Fragment {
 		min.setText(String.format(formatString, mForecast6Day.getTmin(6)));
 		max.setText(String.format(formatString, mForecast6Day.getTmax(6)));
 		
-		// ·Î¿ì µ¥ÀÌÅÍ
+		// ë¡œìš° ë°ì´í„°
 		TextView forecast3day = (TextView) v.findViewById(R.id.fragment_forecast_textview_forecast3day);
 		TextView forecast6day = (TextView) v.findViewById(R.id.fragment_forecast_textview_forecast6day);
 		forecast3day.setText(mForecast3Day.toString());

@@ -64,7 +64,7 @@ public class WeatherManager {
 			
 			for(int i = 0; i < mAddress.size(); i++) {
 				
-				// Áö¿ªº° ³¯¾¾ µ¥ÀÌÅÍ ÀĞ¾î¿À±â
+				// ì§€ì—­ë³„ ë‚ ì”¨ ë°ì´í„° ì½ì–´ì˜¤ê¸°
 				gm.getLocationInfo(mAddress.get(i));				
 				CurrentWeatherModel current = getCurrentWeather(gm.getLatitude(), gm.getLongitude());
 				

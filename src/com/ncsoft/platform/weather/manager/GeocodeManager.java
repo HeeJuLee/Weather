@@ -38,7 +38,7 @@ public class GeocodeManager {
 
 	public void getLocationInfo(String address) {
 
-		// ±¸±Û Áö¿ÀÄÚµù API - ÁÖ¼Ò·Î À§°æµµ¸¦ ÀĞ¾î¿Í¼­ JSON ÆÄ½Ì
+		// êµ¬ê¸€ ì§€ì˜¤ì½”ë”© API - ì£¼ì†Œë¡œ ìœ„ê²½ë„ë¥¼ ì½ì–´ì™€ì„œ JSON íŒŒì‹±
 		StringBuilder sb = new StringBuilder();
 		sb.append(GOOGLE_GEOCODE_API).append(address.replace(" ", "%20"));
 
@@ -56,7 +56,7 @@ public class GeocodeManager {
 					.getJSONObject("geometry").getJSONObject("location").getDouble("lat");
 			mLongitude = ((JSONArray)jsonObject.get("results")).getJSONObject(0)
 					.getJSONObject("geometry").getJSONObject("location").getDouble("lng");			
-			mFormattedAddress = ((JSONArray)jsonObject.get("results")).getJSONObject(0).getString("formatted_address").replace("´ëÇÑ¹Î±¹ ", "");	
+			mFormattedAddress = ((JSONArray)jsonObject.get("results")).getJSONObject(0).getString("formatted_address").replace("ëŒ€í•œë¯¼êµ­ ", "");	
 			
             Log.d(TAG, "address: " + address + ", latitde: " + mLatitude + ", longtitude: " + mLongitude + ", address: " + mFormattedAddress);
 
@@ -75,9 +75,9 @@ public class GeocodeManager {
 			if(list != null) {
 				for(int i = 0; i < list.size(); i++) {
 					Address address = list.get(i);
-					Log.d(TAG, "\nÁÖ¼Ò: " + address.getAddressLine(i));
-					Log.d(TAG, "\nÀ§µµ: " + address.getLatitude());
-					Log.d(TAG, "\n°æµµ: " + address.getLongitude());
+					Log.d(TAG, "\nì£¼ì†Œ: " + address.getAddressLine(i));
+					Log.d(TAG, "\nìœ„ë„: " + address.getLatitude());
+					Log.d(TAG, "\nê²½ë„: " + address.getLongitude());
 				}
 			}
 		} catch(Exception e) {
@@ -95,9 +95,9 @@ public class GeocodeManager {
 			if(list != null) {
 				for(int i = 0; i < list.size(); i++) {
 					Address address = list.get(i);
-					Log.d(TAG, "\nÁÖ¼Ò: " + address.getAddressLine(i));
-					Log.d(TAG, "\nÀ§µµ: " + address.getLatitude());
-					Log.d(TAG, "\n°æµµ: " + address.getLongitude());
+					Log.d(TAG, "\nì£¼ì†Œ: " + address.getAddressLine(i));
+					Log.d(TAG, "\nìœ„ë„: " + address.getLatitude());
+					Log.d(TAG, "\nê²½ë„: " + address.getLongitude());
 				}
 			}
 		} catch(Exception e) {

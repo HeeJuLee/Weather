@@ -6,7 +6,7 @@ import java.util.List;
 import com.ncsoft.platform.weather.R;
 
 /* 
- * Áß±â¿¹º¸ (12½Ã°£ °£°İ, 3ÀÏ~10ÀÏ¿¹º¸)
+ * ì¤‘ê¸°ì˜ˆë³´ (12ì‹œê°„ ê°„ê²©, 3ì¼~10ì¼ì˜ˆë³´)
  */
 public class Forecast6DayModel {
 	
@@ -34,39 +34,39 @@ public class Forecast6DayModel {
 			Forecast6days forecast6day = iterator.next();
 			
 			sb.append("\nForecast6Days");
-			sb.append("\n±¤¿ª½Ãµµ: " + forecast6day.getGrid().getCity());			
-			sb.append("\n½Ã±º±¸: " + forecast6day.getGrid().getCounty());
-			sb.append("\nÀ¾¸éµ¿: " + forecast6day.getGrid().getVillage());
-			sb.append("\n±âÁØÁö¿ª: " + forecast6day.getLocation().getName());
-			sb.append("\nÇÏ´Ã»óÅÂ/±â¿Â: ");
-			sb.append("\n +2ÀÏ ¿ÀÀü: " + forecast6day.getSky().getAmCode2day() + ", " + forecast6day.getSky().getAmName2day());
-			sb.append("\n +2ÀÏ ¿ÀÈÄ: " + forecast6day.getSky().getPmCode2day() + ", " + forecast6day.getSky().getPmName2day());
-			sb.append("\n +2ÀÏ ÃÖ´ë: " + forecast6day.getTemperature().getTmax2day() + ", ÃÖÀú: " + forecast6day.getTemperature().getTmin2day());
-			sb.append("\n +3ÀÏ ¿ÀÀü: " + forecast6day.getSky().getAmCode3day() + ", " +	forecast6day.getSky().getAmName3day());
-			sb.append("\n +3ÀÏ ¿ÀÈÄ: " + forecast6day.getSky().getPmCode3day() + ", " +	forecast6day.getSky().getPmName3day());
-			sb.append("\n +3ÀÏ ÃÖ´ë: " + forecast6day.getTemperature().getTmax3day() + ", ÃÖÀú: " + forecast6day.getTemperature().getTmin3day());			
-			sb.append("\n +4ÀÏ ¿ÀÀü: " + forecast6day.getSky().getAmCode4day() + ", " +	forecast6day.getSky().getAmName4day());
-			sb.append("\n +4ÀÏ ¿ÀÈÄ: " + forecast6day.getSky().getPmCode4day() + ", " +	forecast6day.getSky().getPmName4day());
-			sb.append("\n +4ÀÏ ÃÖ´ë: " + forecast6day.getTemperature().getTmax4day() + ", ÃÖÀú: " + forecast6day.getTemperature().getTmin4day());			
-			sb.append("\n +5ÀÏ ¿ÀÀü: " + forecast6day.getSky().getAmCode5day() + ", " +	forecast6day.getSky().getAmName5day());
-			sb.append("\n +5ÀÏ ¿ÀÈÄ: " + forecast6day.getSky().getPmCode5day() + ", " +	forecast6day.getSky().getPmName5day());
-			sb.append("\n +5ÀÏ ÃÖ´ë: " + forecast6day.getTemperature().getTmax5day() + ", ÃÖÀú: " + forecast6day.getTemperature().getTmin5day());			
-			sb.append("\n +6ÀÏ ¿ÀÀü: " + forecast6day.getSky().getAmCode6day() + ", " +	forecast6day.getSky().getAmName6day());
-			sb.append("\n +6ÀÏ ¿ÀÈÄ: " + forecast6day.getSky().getPmCode6day() + ", " +	forecast6day.getSky().getPmName6day());
-			sb.append("\n +6ÀÏ ÃÖ´ë: " + forecast6day.getTemperature().getTmax6day() + ", ÃÖÀú: " + forecast6day.getTemperature().getTmin6day());
-			sb.append("\n +7ÀÏ ¿ÀÀü: " + forecast6day.getSky().getAmCode7day() + ", " +	forecast6day.getSky().getAmName7day());
-			sb.append("\n +7ÀÏ ¿ÀÈÄ: " + forecast6day.getSky().getPmCode7day() + ", " +	forecast6day.getSky().getPmName7day());
-			sb.append("\n +7ÀÏ ÃÖ´ë: " + forecast6day.getTemperature().getTmax7day() + ", ÃÖÀú: " + forecast6day.getTemperature().getTmin7day());			
-			sb.append("\n +8ÀÏ ¿ÀÀü: " + forecast6day.getSky().getAmCode8day() + ", " +	forecast6day.getSky().getAmName8day());
-			sb.append("\n +8ÀÏ ¿ÀÈÄ: " + forecast6day.getSky().getPmCode8day() + ", " +	forecast6day.getSky().getPmName8day());
-			sb.append("\n +8ÀÏ ÃÖ´ë: " + forecast6day.getTemperature().getTmax8day() + ", ÃÖÀú: " + forecast6day.getTemperature().getTmin8day());
-			sb.append("\n +9ÀÏ ¿ÀÀü: " + forecast6day.getSky().getAmCode9day() + ", " +	forecast6day.getSky().getAmName9day());
-			sb.append("\n +9ÀÏ ¿ÀÈÄ: " + forecast6day.getSky().getPmCode9day() + ", " +	forecast6day.getSky().getPmName9day());
-			sb.append("\n +9ÀÏ ÃÖ´ë: " + forecast6day.getTemperature().getTmax9day() + ", ÃÖÀú: " + forecast6day.getTemperature().getTmin9day());
-			sb.append("\n +10ÀÏ ¿ÀÀü: " + forecast6day.getSky().getAmCode10day() + ", " + forecast6day.getSky().getAmName10day());
-			sb.append("\n +10ÀÏ ¿ÀÈÄ: " + forecast6day.getSky().getPmCode10day() + ", " + forecast6day.getSky().getPmName10day());
-			sb.append("\n +10ÀÏ ÃÖ´ë: " + forecast6day.getTemperature().getTmax10day() + ", ÃÖÀú: " + forecast6day.getTemperature().getTmin10day());
-			sb.append("\n°üÃø½Ã°£: " + forecast6day.getTimeRelease());
+			sb.append("\nê´‘ì—­ì‹œë„: " + forecast6day.getGrid().getCity());			
+			sb.append("\nì‹œêµ°êµ¬: " + forecast6day.getGrid().getCounty());
+			sb.append("\nìë©´ë™: " + forecast6day.getGrid().getVillage());
+			sb.append("\nê¸°ì¤€ì§€ì—­: " + forecast6day.getLocation().getName());
+			sb.append("\ní•˜ëŠ˜ìƒíƒœ/ê¸°ì˜¨: ");
+			sb.append("\n +2ì¼ ì˜¤ì „: " + forecast6day.getSky().getAmCode2day() + ", " + forecast6day.getSky().getAmName2day());
+			sb.append("\n +2ì¼ ì˜¤í›„: " + forecast6day.getSky().getPmCode2day() + ", " + forecast6day.getSky().getPmName2day());
+			sb.append("\n +2ì¼ ìµœëŒ€: " + forecast6day.getTemperature().getTmax2day() + ", ìµœì €: " + forecast6day.getTemperature().getTmin2day());
+			sb.append("\n +3ì¼ ì˜¤ì „: " + forecast6day.getSky().getAmCode3day() + ", " +	forecast6day.getSky().getAmName3day());
+			sb.append("\n +3ì¼ ì˜¤í›„: " + forecast6day.getSky().getPmCode3day() + ", " +	forecast6day.getSky().getPmName3day());
+			sb.append("\n +3ì¼ ìµœëŒ€: " + forecast6day.getTemperature().getTmax3day() + ", ìµœì €: " + forecast6day.getTemperature().getTmin3day());			
+			sb.append("\n +4ì¼ ì˜¤ì „: " + forecast6day.getSky().getAmCode4day() + ", " +	forecast6day.getSky().getAmName4day());
+			sb.append("\n +4ì¼ ì˜¤í›„: " + forecast6day.getSky().getPmCode4day() + ", " +	forecast6day.getSky().getPmName4day());
+			sb.append("\n +4ì¼ ìµœëŒ€: " + forecast6day.getTemperature().getTmax4day() + ", ìµœì €: " + forecast6day.getTemperature().getTmin4day());			
+			sb.append("\n +5ì¼ ì˜¤ì „: " + forecast6day.getSky().getAmCode5day() + ", " +	forecast6day.getSky().getAmName5day());
+			sb.append("\n +5ì¼ ì˜¤í›„: " + forecast6day.getSky().getPmCode5day() + ", " +	forecast6day.getSky().getPmName5day());
+			sb.append("\n +5ì¼ ìµœëŒ€: " + forecast6day.getTemperature().getTmax5day() + ", ìµœì €: " + forecast6day.getTemperature().getTmin5day());			
+			sb.append("\n +6ì¼ ì˜¤ì „: " + forecast6day.getSky().getAmCode6day() + ", " +	forecast6day.getSky().getAmName6day());
+			sb.append("\n +6ì¼ ì˜¤í›„: " + forecast6day.getSky().getPmCode6day() + ", " +	forecast6day.getSky().getPmName6day());
+			sb.append("\n +6ì¼ ìµœëŒ€: " + forecast6day.getTemperature().getTmax6day() + ", ìµœì €: " + forecast6day.getTemperature().getTmin6day());
+			sb.append("\n +7ì¼ ì˜¤ì „: " + forecast6day.getSky().getAmCode7day() + ", " +	forecast6day.getSky().getAmName7day());
+			sb.append("\n +7ì¼ ì˜¤í›„: " + forecast6day.getSky().getPmCode7day() + ", " +	forecast6day.getSky().getPmName7day());
+			sb.append("\n +7ì¼ ìµœëŒ€: " + forecast6day.getTemperature().getTmax7day() + ", ìµœì €: " + forecast6day.getTemperature().getTmin7day());			
+			sb.append("\n +8ì¼ ì˜¤ì „: " + forecast6day.getSky().getAmCode8day() + ", " +	forecast6day.getSky().getAmName8day());
+			sb.append("\n +8ì¼ ì˜¤í›„: " + forecast6day.getSky().getPmCode8day() + ", " +	forecast6day.getSky().getPmName8day());
+			sb.append("\n +8ì¼ ìµœëŒ€: " + forecast6day.getTemperature().getTmax8day() + ", ìµœì €: " + forecast6day.getTemperature().getTmin8day());
+			sb.append("\n +9ì¼ ì˜¤ì „: " + forecast6day.getSky().getAmCode9day() + ", " +	forecast6day.getSky().getAmName9day());
+			sb.append("\n +9ì¼ ì˜¤í›„: " + forecast6day.getSky().getPmCode9day() + ", " +	forecast6day.getSky().getPmName9day());
+			sb.append("\n +9ì¼ ìµœëŒ€: " + forecast6day.getTemperature().getTmax9day() + ", ìµœì €: " + forecast6day.getTemperature().getTmin9day());
+			sb.append("\n +10ì¼ ì˜¤ì „: " + forecast6day.getSky().getAmCode10day() + ", " + forecast6day.getSky().getAmName10day());
+			sb.append("\n +10ì¼ ì˜¤í›„: " + forecast6day.getSky().getPmCode10day() + ", " + forecast6day.getSky().getPmName10day());
+			sb.append("\n +10ì¼ ìµœëŒ€: " + forecast6day.getTemperature().getTmax10day() + ", ìµœì €: " + forecast6day.getTemperature().getTmin10day());
+			sb.append("\nê´€ì¸¡ì‹œê°„: " + forecast6day.getTimeRelease());
 		}
 		
 		return sb.toString();
@@ -109,18 +109,18 @@ public class Forecast6DayModel {
 		return -999;
 	}
 	/*
-	ÇÏ´Ã»óÅÂÄÚµå¸í
-	- SKY_W00: »óÅÂ¾øÀ½
-	- SKY_W01: ¸¼À½
-	- SKY_W02: ±¸¸§Á¶±İ
-	- SKY_W03: ±¸¸§¸¹À½
-	- SKY_W04: Èå¸²
-	- SKY_W07: Èå¸®°í ºñ
-	- SKY_W09: ±¸¸§¸¹°í ºñ
-	- SKY_W10: ¼Ò³ª±â
-	- SKY_W11: ºñ ¶Ç´Â ´«
-	- SKY_W12: ±¸¸§¸¹°í ´«
-	- SKY_W13: Èå¸®°í ´«
+	í•˜ëŠ˜ìƒíƒœì½”ë“œëª…
+	- SKY_W00: ìƒíƒœì—†ìŒ
+	- SKY_W01: ë§‘ìŒ
+	- SKY_W02: êµ¬ë¦„ì¡°ê¸ˆ
+	- SKY_W03: êµ¬ë¦„ë§ìŒ
+	- SKY_W04: íë¦¼
+	- SKY_W07: íë¦¬ê³  ë¹„
+	- SKY_W09: êµ¬ë¦„ë§ê³  ë¹„
+	- SKY_W10: ì†Œë‚˜ê¸°
+	- SKY_W11: ë¹„ ë˜ëŠ” ëˆˆ
+	- SKY_W12: êµ¬ë¦„ë§ê³  ëˆˆ
+	- SKY_W13: íë¦¬ê³  ëˆˆ
 	*/
 	public int getSkyResourceID(int day, boolean am) {
 		List<Forecast6days> forecast6days = weather.getForecast6days();
@@ -167,7 +167,7 @@ public class Forecast6DayModel {
 		return R.drawable.weather38;
 	}
 	
-	// ¿äÃ»°á°ú
+	// ìš”ì²­ê²°ê³¼
 	public class Result {
 		private String message;
 		private int code;
@@ -183,7 +183,7 @@ public class Forecast6DayModel {
 			return requestUrl;
 		}
 	}
-	// °øÅë»çÇ×
+	// ê³µí†µì‚¬í•­
 	public class Common {
 		private String alertYn;
 		private String stormYn;
@@ -195,7 +195,7 @@ public class Forecast6DayModel {
 			return stormYn;
 		}
 	}
-	//³¯¾¾Á¤º¸
+	//ë‚ ì”¨ì •ë³´
 	public class Weather {
 		List<Forecast6days> forecast6days;
 
@@ -203,7 +203,7 @@ public class Forecast6DayModel {
 			return forecast6days;
 		}		
 	}
-	// Áß±â¿¹º¸
+	// ì¤‘ê¸°ì˜ˆë³´
 	public class Forecast6days {
 		private Grid grid;
 		private Location location;
@@ -227,7 +227,7 @@ public class Forecast6DayModel {
 			return timeRelease;
 		}
 	}
-	// °İÀÚÁ¤º¸
+	// ê²©ìì •ë³´
 	public class Grid {
 		private String city;
 		private String county;
@@ -243,7 +243,7 @@ public class Forecast6DayModel {
 			return village;
 		}
 	}
-	// ±âÁØÁö¿ª
+	// ê¸°ì¤€ì§€ì—­
 	public class Location {
 		private String name;
 
@@ -251,7 +251,7 @@ public class Forecast6DayModel {
 			return name;
 		}
 	}
-	// ÇÏ´Ã»óÅÂ
+	// í•˜ëŠ˜ìƒíƒœ
 	public class Sky {
 		private String amCode2day;
 		private String amName2day;
@@ -399,7 +399,7 @@ public class Forecast6DayModel {
 			return pmName10day;
 		}
 	}
-	// ±â¿ÂÁ¤º¸
+	// ê¸°ì˜¨ì •ë³´
 	public class Temperature {
 		private String tmin2day;
 		private String tmax2day;

@@ -8,7 +8,7 @@ import java.util.Iterator;
 import java.util.List;
 	
 /* 
- * ´Ü±â¿¹º¸ (3½Ã°£ °£°İ, 4½Ã°£~3ÀÏ¿¹º¸)
+ * ë‹¨ê¸°ì˜ˆë³´ (3ì‹œê°„ ê°„ê²©, 4ì‹œê°„~3ì¼ì˜ˆë³´)
  */
 public class Forecast3DayModel {
 
@@ -36,22 +36,22 @@ public class Forecast3DayModel {
 			Forecast3days forecast3day = iterator.next();
 			
 			sb.append("\nForecast3Days");
-			sb.append("\n±¤¿ª½Ãµµ: " + forecast3day.getGrid().getCity());			
-			sb.append("\n½Ã±º±¸: " + forecast3day.getGrid().getCounty());
-			sb.append("\nÀ¾¸éµ¿: " + forecast3day.getGrid().getVillage());
-			sb.append("\nÀ§µµ: " + forecast3day.getGrid().getLatitude());
-			sb.append("\n°æµµ: " + forecast3day.getGrid().getLongitude());
-			sb.append("\n±â¿Â: ");
-			sb.append("\n ³»ÀÏ ÃÖÀú: " + forecast3day.getFcstdaily().getTemperature().getTmin2day());
-			sb.append("\n ³»ÀÏ ÃÖ°í: " + forecast3day.getFcstdaily().getTemperature().getTmax2day());
-			sb.append("\n ¸ğ·¹ ÃÖÀú: " + forecast3day.getFcstdaily().getTemperature().getTmin3day());
-			sb.append("\n ¸ğ·¹ ÃÖ°í: " + forecast3day.getFcstdaily().getTemperature().getTmax3day());		
-			sb.append("\n°üÃø½Ã°£: " + forecast3day.getTimeRelease());
+			sb.append("\nê´‘ì—­ì‹œë„: " + forecast3day.getGrid().getCity());			
+			sb.append("\nì‹œêµ°êµ¬: " + forecast3day.getGrid().getCounty());
+			sb.append("\nìë©´ë™: " + forecast3day.getGrid().getVillage());
+			sb.append("\nìœ„ë„: " + forecast3day.getGrid().getLatitude());
+			sb.append("\nê²½ë„: " + forecast3day.getGrid().getLongitude());
+			sb.append("\nê¸°ì˜¨: ");
+			sb.append("\n ë‚´ì¼ ìµœì €: " + forecast3day.getFcstdaily().getTemperature().getTmin2day());
+			sb.append("\n ë‚´ì¼ ìµœê³ : " + forecast3day.getFcstdaily().getTemperature().getTmax2day());
+			sb.append("\n ëª¨ë ˆ ìµœì €: " + forecast3day.getFcstdaily().getTemperature().getTmin3day());
+			sb.append("\n ëª¨ë ˆ ìµœê³ : " + forecast3day.getFcstdaily().getTemperature().getTmax3day());		
+			sb.append("\nê´€ì¸¡ì‹œê°„: " + forecast3day.getTimeRelease());
 		}
 		
 		return sb.toString();
 	}
-	// ¿äÃ»°á°ú
+	// ìš”ì²­ê²°ê³¼
 	public class Result {
 		private String message;
 		private int code;
@@ -67,7 +67,7 @@ public class Forecast3DayModel {
 			return requestUrl;
 		}
 	}
-	// °øÅë»çÇ×
+	// ê³µí†µì‚¬í•­
 	public class Common {
 		private String alertYn;
 		private String stormYn;
@@ -79,7 +79,7 @@ public class Forecast3DayModel {
 			return stormYn;
 		}
 	}
-	//³¯¾¾Á¤º¸
+	//ë‚ ì”¨ì •ë³´
 	public class Weather {
 		List<Forecast3days> forecast3days;
 
@@ -87,7 +87,7 @@ public class Forecast3DayModel {
 			return forecast3days;
 		}		
 	}
-	// ´Ü±â¿¹º¸
+	// ë‹¨ê¸°ì˜ˆë³´
 	public class Forecast3days {
 		private Grid grid;
 		private Fcst3hour fcst3hour;
@@ -107,7 +107,7 @@ public class Forecast3DayModel {
 			return timeRelease;
 		}
 	}
-	// °İÀÚÁ¤º¸
+	// ê²©ìì •ë³´
 	public class Grid {
 		private String city;
 		private String county;
@@ -131,7 +131,7 @@ public class Forecast3DayModel {
 			return longitude;
 		}
 	}
-	// 3½Ã°£ ¿¹º¸
+	// 3ì‹œê°„ ì˜ˆë³´
 	public class Fcst3hour {
 		private Sky sky;
 		private Temperature temperature;
@@ -143,14 +143,14 @@ public class Forecast3DayModel {
 			
 		}
 	}
-	// 24 ½Ã°£ ¿¹º¸
+	// 24 ì‹œê°„ ì˜ˆë³´
 	public class Fcstdaily {
 		private Temperature temperature;
 		
 		public Temperature getTemperature() {
 			return temperature;
 		}
-		// ±â¿ÂÁ¤º¸
+		// ê¸°ì˜¨ì •ë³´
 		public class Temperature {
 			private String tmin2day;
 			private String tmax2day;

@@ -6,7 +6,7 @@ import java.util.List;
 import com.ncsoft.platform.weather.R;
 
 /* 
- * ÇöÀç³¯¾¾(ºĞº°)
+ * í˜„ì¬ë‚ ì”¨(ë¶„ë³„)
  */
 public class CurrentWeatherModel {
 
@@ -177,21 +177,21 @@ public class CurrentWeatherModel {
 	}
 
 	/*
-	ÇÏ´Ã»óÅÂÄÚµå¸í
-	- SKY_A01: ¸¼À½
-	- SKY_A02: ±¸¸§Á¶±İ
-	- SKY_A03: ±¸¸§¸¹À½
-	- SKY_A04: ±¸¸§¸¹°í ºñ
-	- SKY_A05: ±¸¸§¸¹°í ´«
-	- SKY_A06: ±¸¸§¸¹°í ºñ ¶Ç´Â ´«
-	- SKY_A07: Èå¸²
-	- SKY_A08: Èå¸®°í ºñ
-	- SKY_A09: Èå¸®°í ´«
-	- SKY_A10:  Èå¸®°í ºñ ¶Ç´Â ´«
-	- SKY_A11: Èå¸®°í ³«·Ú
-	- SKY_A12: ³ú¿ì, ºñ
-	- SKY_A13: ³ú¿ì, ´«
-	- SKY_A14: ³ú¿ì, ºñ ¶Ç´Â ´«
+	í•˜ëŠ˜ìƒíƒœì½”ë“œëª…
+	- SKY_A01: ë§‘ìŒ
+	- SKY_A02: êµ¬ë¦„ì¡°ê¸ˆ
+	- SKY_A03: êµ¬ë¦„ë§ìŒ
+	- SKY_A04: êµ¬ë¦„ë§ê³  ë¹„
+	- SKY_A05: êµ¬ë¦„ë§ê³  ëˆˆ
+	- SKY_A06: êµ¬ë¦„ë§ê³  ë¹„ ë˜ëŠ” ëˆˆ
+	- SKY_A07: íë¦¼
+	- SKY_A08: íë¦¬ê³  ë¹„
+	- SKY_A09: íë¦¬ê³  ëˆˆ
+	- SKY_A10:  íë¦¬ê³  ë¹„ ë˜ëŠ” ëˆˆ
+	- SKY_A11: íë¦¬ê³  ë‚™ë¢°
+	- SKY_A12: ë‡Œìš°, ë¹„
+	- SKY_A13: ë‡Œìš°, ëˆˆ
+	- SKY_A14: ë‡Œìš°, ë¹„ ë˜ëŠ” ëˆˆ
 	*/
 	public int getSkyResourceID() {
 		List<Minutely> minutelys = weather.getMinutely();
@@ -234,27 +234,27 @@ public class CurrentWeatherModel {
 			Minutely minutely = iterator.next();
 			
 			sb.append("\nCurrentWeather");
-			sb.append("\n°üÃø¼Ò¸í: " + minutely.getStation().getName());			
-			sb.append("\n°üÃø¼Ò ÁöÁ¡¹øÈ£(stnid): " + minutely.getStation().getId());
-			sb.append("\n°üÃø¼Ò À§µµ: " + minutely.getStation().getLatitude());
-			sb.append("\n°üÃø¼Ò °æµµ: " + minutely.getStation().getLongitude());
-			sb.append("\nÇ³Çâ: " + minutely.getWind().getWdir());
-			sb.append("\nÇ³¼Ó: " + minutely.getWind().getWspd());
-			// °­¿ì·® or Àû¼³·®
+			sb.append("\nê´€ì¸¡ì†Œëª…: " + minutely.getStation().getName());			
+			sb.append("\nê´€ì¸¡ì†Œ ì§€ì ë²ˆí˜¸(stnid): " + minutely.getStation().getId());
+			sb.append("\nê´€ì¸¡ì†Œ ìœ„ë„: " + minutely.getStation().getLatitude());
+			sb.append("\nê´€ì¸¡ì†Œ ê²½ë„: " + minutely.getStation().getLongitude());
+			sb.append("\ní’í–¥: " + minutely.getWind().getWdir());
+			sb.append("\ní’ì†: " + minutely.getWind().getWspd());
+			// ê°•ìš°ëŸ‰ or ì ì„¤ëŸ‰
 			sb.append("\n" + minutely.getPrecipitation().getKorType() + ": " + minutely.getPrecipitation().getSinceOntime());
-			sb.append("\nÇÏ´Ã»óÅÂ: " + minutely.getSky().getName());
-			sb.append("\nÇÏ´Ã»óÅÂÄÚµå: " + minutely.getSky().getCode());
-			sb.append("\nÇöÀç±â¿Â: " + minutely.getTemperature().getTc());
-			sb.append("\n¿À´Ã ÃÖ°í±â¿Â: " + minutely.getTemperature().getTmax());
-			sb.append("\n¿À´Ã ÃÖÀú±â¿Â: " + minutely.getTemperature().getTmin());
-			sb.append("\n½Àµµ: " + minutely.getHumidity());
-			sb.append("\n±â¾Ğ: " + minutely.getPressure().getSurface());
-			sb.append("\n°üÃø½Ã°£: " + minutely.getTimeObservation());
+			sb.append("\ní•˜ëŠ˜ìƒíƒœ: " + minutely.getSky().getName());
+			sb.append("\ní•˜ëŠ˜ìƒíƒœì½”ë“œ: " + minutely.getSky().getCode());
+			sb.append("\ní˜„ì¬ê¸°ì˜¨: " + minutely.getTemperature().getTc());
+			sb.append("\nì˜¤ëŠ˜ ìµœê³ ê¸°ì˜¨: " + minutely.getTemperature().getTmax());
+			sb.append("\nì˜¤ëŠ˜ ìµœì €ê¸°ì˜¨: " + minutely.getTemperature().getTmin());
+			sb.append("\nìŠµë„: " + minutely.getHumidity());
+			sb.append("\nê¸°ì••: " + minutely.getPressure().getSurface());
+			sb.append("\nê´€ì¸¡ì‹œê°„: " + minutely.getTimeObservation());
 		}
 		return sb.toString();
 	}
 		
-	// ¿äÃ»°á°ú
+	// ìš”ì²­ê²°ê³¼
 	public class Result {
 		private String message;
 		private int code;
@@ -270,7 +270,7 @@ public class CurrentWeatherModel {
 			return requestUrl;
 		}
 	}
-	// °øÅë»çÇ×
+	// ê³µí†µì‚¬í•­
 	public class Common {
 		private String alertYn;
 		private String stormYn;
@@ -282,7 +282,7 @@ public class CurrentWeatherModel {
 			return stormYn;
 		}
 	}
-	//³¯¾¾Á¤º¸
+	//ë‚ ì”¨ì •ë³´
 	public class Weather {
 		private List<Minutely> minutely;
 
@@ -290,7 +290,7 @@ public class CurrentWeatherModel {
 			return minutely;
 		}
 	}
-	// ÇöÀç³¯¾¾(ºĞ´ÜÀ§)
+	// í˜„ì¬ë‚ ì”¨(ë¶„ë‹¨ìœ„)
 	public class Minutely {
 		private Station station;
 		private Wind wind; 
@@ -334,7 +334,7 @@ public class CurrentWeatherModel {
 			return timeObservation;
 		}
 	}
-	// °üÃø¼ÒÁ¤º¸
+	// ê´€ì¸¡ì†Œì •ë³´
 	public class Station {
 		private String name;
 		private String id;
@@ -358,7 +358,7 @@ public class CurrentWeatherModel {
 			return longitude;
 		}
 	}
-	// ¹Ù¶÷Á¤º¸
+	// ë°”ëŒì •ë³´
 	public class Wind	{
 		private String wdir;
 		private String wspd;
@@ -370,7 +370,7 @@ public class CurrentWeatherModel {
 			return wspd;
 		}
 	}
-	// °­¼öÁ¤º¸
+	// ê°•ìˆ˜ì •ë³´
 	public class Precipitation {
 		public static final int PRECIPITATION_NONE = 0;
 		public static final int PRECIPITATION_RAIN = 1;
@@ -388,22 +388,22 @@ public class CurrentWeatherModel {
 		}
 		
 		public String getKorType() {
-			String korType = "°­¿ì·®(mm)";
+			String korType = "ê°•ìš°ëŸ‰(mm)";
 			switch(type) {
 				case Precipitation.PRECIPITATION_NONE:
 				case Precipitation.PRECIPITATION_RAIN:
 				case Precipitation.PRECIPITATION_RAIN_SNOW:
 				default:
-					korType = "°­¿ì·®(mm)";
+					korType = "ê°•ìš°ëŸ‰(mm)";
 					break;
 				case Precipitation.PRECIPITATION_SNOW:
-					korType = "Àû¼³·®(cm)";
+					korType = "ì ì„¤ëŸ‰(cm)";
 					break;
 			}
 			return korType;
 		}
 	}
-	// ÇÏ´Ã»óÅÂÁ¤º¸
+	// í•˜ëŠ˜ìƒíƒœì •ë³´
 	public class Sky {
 		private String name;
 		private String code;
@@ -417,40 +417,40 @@ public class CurrentWeatherModel {
 		public String getKorName() {
 			String korName;
 			if(name.equalsIgnoreCase("SKY_A01"))
-				korName = "¸¼À½";
+				korName = "ë§‘ìŒ";
 			else if(name.equalsIgnoreCase("SKY_A02"))
-				korName = "±¸¸§Á¶±İ";
+				korName = "êµ¬ë¦„ì¡°ê¸ˆ";
 			else if(name.equalsIgnoreCase("SKY_A03"))
-				korName = "±¸¸§¸¹À½";
+				korName = "êµ¬ë¦„ë§ìŒ";
 			else if(name.equalsIgnoreCase("SKY_A04"))
-				korName = "±¸¸§¸¹°í ºñ";
+				korName = "êµ¬ë¦„ë§ê³  ë¹„";
 			else if(name.equalsIgnoreCase("SKY_A05"))
-				korName = "±¸¸§¸¹°í ´«";
+				korName = "êµ¬ë¦„ë§ê³  ëˆˆ";
 			else if(name.equalsIgnoreCase("SKY_A06"))
-				korName = "±¸¸§¸¹°í ºñ ¶Ç´Â ´«";
+				korName = "êµ¬ë¦„ë§ê³  ë¹„ ë˜ëŠ” ëˆˆ";
 			else if(name.equalsIgnoreCase("SKY_A07"))
-				korName = "Èå¸²";
+				korName = "íë¦¼";
 			else if(name.equalsIgnoreCase("SKY_A08"))
-				korName = "Èå¸®°í ºñ";
+				korName = "íë¦¬ê³  ë¹„";
 			else if(name.equalsIgnoreCase("SKY_A09"))
-				korName = "Èå¸®°í ´«";
+				korName = "íë¦¬ê³  ëˆˆ";
 			else if(name.equalsIgnoreCase("SKY_A10"))
-				korName = "Èå¸®°í ºñ ¶Ç´Â ´«";
+				korName = "íë¦¬ê³  ë¹„ ë˜ëŠ” ëˆˆ";
 			else if(name.equalsIgnoreCase("SKY_A11"))
-				korName = "Èå¸®°í ³«·Ú";
+				korName = "íë¦¬ê³  ë‚™ë¢°";
 			else if(name.equalsIgnoreCase("SKY_A12"))
-				korName = "³ú¿ì, ºñ";
+				korName = "ë‡Œìš°, ë¹„";
 			else if(name.equalsIgnoreCase("SKY_A13"))
-				korName = "³ú¿ì, ´«";
+				korName = "ë‡Œìš°, ëˆˆ";
 			else if(name.equalsIgnoreCase("SKY_A14"))
-				korName = "³ú¿ì, ºñ ¶Ç´Â ´«";
+				korName = "ë‡Œìš°, ë¹„ ë˜ëŠ” ëˆˆ";
 			else
-				korName = "¸¼À½";
+				korName = "ë§‘ìŒ";
 
 			return korName;
 		}
 	}
-	// °­¿ìÁ¤º¸
+	// ê°•ìš°ì •ë³´
 	public class Rain {
 		private String sinceOntime;
 		private String sinceMidnight;
@@ -490,7 +490,7 @@ public class CurrentWeatherModel {
 			return last24hour;
 		}
 	}
-	// ±â¿ÂÁ¤º¸
+	// ê¸°ì˜¨ì •ë³´
 	public class Temperature {
 		private String tc;
 		private String tmax;
@@ -506,7 +506,7 @@ public class CurrentWeatherModel {
 			return tmin;
 		}
 	}
-	// ±â¾ĞÁ¤º¸
+	// ê¸°ì••ì •ë³´
 	public class Pressure {
 		private String surface;
 		private String seaLevel;
