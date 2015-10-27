@@ -53,7 +53,7 @@
         android:layout_toRightOf="@+id/list_weather_item_temperature"
         android:text="@string/weather_min_max"
         android:textColor="#343434"
-        android:textSize="12sp" />
+        android:textSize="13sp" />
 
     <TextView
         android:id="@+id/list_weather_item_skyname"
@@ -64,7 +64,7 @@
         android:layout_marginBottom="16dp"
         android:text="@string/weather_sky_condition"
         android:textColor="#343434"
-        android:textSize="12sp" />
+        android:textSize="13sp" />
 
     
     <ImageView
